@@ -185,3 +185,104 @@ function validateLogin(username, password) {
 }
 validateLogin("ariel368", "password123");
 validateLogin("ariel333", "pass234");
+
+// Substring Extraction:
+// Write a function named extractInitials that takes two parameters, firstName and lastName.
+// Inside the function, use the charAt and toUpperCase methods to extract the first letter of each name and convert them to uppercase.
+// Return a string that combines the initials with a dot in between, like "J.D."
+
+function extractInitials(firstName, lastName) {
+  let initials = firstName.charAt(0) + "." + lastName.charAt(0) + ".";
+  return initials.toUpperCase();
+}
+
+console.log(extractInitials("Ariel", "Bitan"));
+
+// String Replacement:
+// Write a function named maskEmail that takes one parameter, email.
+// Inside the function, use the replace method to replace the part of the email before the "@" symbol with "*****".
+// Return the masked email.
+
+function maskEmail(email) {
+  maskedEmail = email.replace("bitan502", "******");
+  console.log(maskedEmail);
+}
+maskEmail("bitan502@gmail.com");
+
+// Nested If-Else:
+// Write a function named gradeCalculator that takes one parameter, score.
+// Inside the function, use nested if-else statements to determine the grade:
+// If score is greater than or equal to 90, return "A".
+// Else if score is greater than or equal to 80, return "B".
+// Else if score is greater than or equal to 70, return "C".
+// Else if score is greater than or equal to 60, return "D".
+// Else, return "F".
+
+function gradeCalculator(score) {
+  if (score >= 90) {
+    return "A";
+  } else if (score >= 80) {
+    return "B";
+  } else if (score >= 70) {
+    return "C";
+  } else if (score >= 60) {
+    return "D";
+  } else {
+    return "F";
+  }
+}
+console.log(gradeCalculator(12));
+
+// Complex Boolean Conditions:
+// Write a function named canVote that takes two parameters, age and isCitizen.
+// Inside the function, use a complex boolean expression to check:
+// If age is 18 or older and isCitizen is true, return "You are eligible to vote."
+// Else, return "You are not eligible to vote."
+
+function canVote(age, isCitizen) {
+  if (age > 18 && isCitizen) return "You are eligible to vote.";
+  else return "You are not eligible to vote";
+}
+
+console.log(canVote(18, false)); // cant vote
+console.log(canVote(21, true)); // can vote
+
+// String and Number Conversion:
+// Write a function named convertToUpperCaseAndAddAge that takes two parameters, name and age.
+// Inside the function, use the toUpperCase method to convert the name to uppercase.
+// Convert the age to a string and concatenate it with the uppercase name.
+// Return the resulting string, like "JOHN25".
+
+function convertToUpperCaseAndAddAge(name, age) {
+  name = name.toUpperCase();
+  let nameAndAge = name + String(age);
+  return nameAndAge;
+}
+console.log(convertToUpperCaseAndAddAge("John", 25));
+console.log(convertToUpperCaseAndAddAge("john", 35).charAt(4)); // returns 3
+
+// Capitalize First Letter:
+// Write a function named capitalize that takes one parameter, word.
+// Inside the function, capitalize the first letter of the word and keep the rest of the word unchanged.
+// Return the resulting string.
+
+function capitalize(word) {
+  word.trim();
+  let firstLetterCapitilized = word.charAt(0).toUpperCase();
+  let restOfTheWord = word.substring(1, word.length);
+  return firstLetterCapitilized + restOfTheWord;
+}
+
+console.log(capitalize("hello world"));
+
+// Check Substring:
+// Write a function named containsSubstring that takes two parameters, mainString and subString.
+// Inside the function, check if mainString contains subString.
+// Return true if it does, otherwise return false.
+
+function containsSubstring(mainString, substring) {
+  return mainString.includes(substring);
+}
+
+console.log(containsSubstring("ArielBitan", "Ariel"));
+console.log(containsSubstring("ArielBitan", "Shlomo"));
