@@ -113,7 +113,8 @@ function checkEligibility(age, isStudent) {
     else if (!isStudent) return "You are an adult non-student";
   }
 }
-console.log(checkEligibility(25, false));
+let answer = checkEligibility(25, false);
+console.log(answer);
 
 // Write a function named formatName that takes one parameter, name.
 // Inside the function, use trim() to remove any leading or trailing whitespace from the name.
