@@ -43,7 +43,20 @@ console.log(false || false || true); // true
 // for example 5=3 && 5=5 && 5=5 the second operand doesnt matter
 
 // question 15
-// when a is already false
+// when 'a' is false
 
 // question 16
-// when a is true
+// when 'a' is true
+
+// question 17
+console.log(5 > 3 && 2 < 4); // true
+
+// question 18
+console.log(5 > 7 || 3 < 2); //false
+
+// question 19
+console.log(!(5 > 3)); //false
+
+// question 20
+console.log((5 > 3 || 6 > 3) && 6 < 3); // false
+console.log(5 > 3 || (6 > 3 && 6 < 3)); // true
