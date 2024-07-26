@@ -10,8 +10,7 @@ mainOperation();
 function verifyPIN(pin) {
   if (pin === "-1") {
     alert("Your pin is " + pinCode);
-  }
-  if (pinCode === pin) {
+  } else if (pinCode === pin) {
     return true;
   } else {
     const pinInput = prompt(
@@ -29,7 +28,6 @@ function checkBalance() {
 // checkBalance();
 
 function withdrawBalance(withDrawAmount) {
-  alert("The maximum withdraw amount is " + withdrawLim);
   if (
     accountBalance - withDrawAmount >= 0 &&
     withDrawAmount <= withdrawLim &&
@@ -65,7 +63,7 @@ function deposit(depositAmount) {
 // deposit("hello");
 
 function mainOperation() {
-  const userPinCode = Number(prompt("Please verify your PIN"));
+  const userPinCode = prompt("Please verify your PIN");
   verifyPIN(userPinCode);
   switch (
     prompt(`Type 1 to check balance,
@@ -81,6 +79,7 @@ function mainOperation() {
           "Enter amount of money to withdraw (maximum " + withdrawLim + "$)"
         )
       );
+      alert("The maximum withdraw amount is " + withdrawLim);
       withdrawBalance(moneyToWithdraw);
       break;
     case "3":

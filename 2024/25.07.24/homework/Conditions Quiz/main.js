@@ -313,3 +313,203 @@ if (num2 > 0) {
   console.log("Enter a valid number");
 }
 console.log(parity, sign);
+
+// 22.
+let score1 = 5;
+let attendance = 60;
+let grade2;
+
+if (attendance < 80) {
+  score1--;
+}
+if (score1 === 5) {
+  grade2 = "A";
+} else if (score1 === 4) {
+  grade2 = "B";
+} else if (score1 === 3) {
+  grade2 = "C";
+} else if (score1 === 2) {
+  grade2 = "D";
+} else if (score2 === 1) {
+  grade2 = "F";
+} else {
+  console.log("invalid score");
+}
+console.log(grade2);
+
+// 23.
+let year2 = 1200;
+let isLeapYear1;
+
+if (
+  (year2 % 100 === 0 && year2 % 400 === 0) ||
+  (year2 % 4 === 0 && year2 % 100 !== 0)
+) {
+  isLeapYear1 = true;
+} else {
+  isLeapYear1 = false;
+}
+console.log(isLeapYear1);
+
+// 24.
+let age2 = 63;
+let isEmployed = false;
+let workStatus;
+if (age <= 24) {
+  workStatus = "Student";
+} else if (age >= 24 && age <= 65) {
+  if (isEmployed) {
+    workStatus = "Employed Adult";
+  } else {
+    workStatus = "Unemployed Adult";
+  }
+} else if (age > 65) {
+  workStatus = "Retiree";
+} else {
+  console.log("invalid age");
+}
+console.log(workStatus);
+
+// 26.
+let x = 0;
+let y = 5;
+let quadrant;
+
+if (x < 0) {
+  if (y > 0) {
+    quadrant = 1;
+  } else if (y < 0) {
+    quadrant = 4;
+  } else if (y === 0) {
+    quadrant = "between 1 and 4";
+  } else {
+    quadrant = "invalid number";
+  }
+} else if (x > 0) {
+  if (y < 0) {
+    quadrant = 3;
+  } else if (y > 0) {
+    quadrant = 2;
+  } else if (y === 0) {
+    quadrant = "between 3 and 2";
+  } else {
+    quadrant = "invalid number";
+  }
+} else if (x === 0) {
+  if (y > 0) {
+    quadrant = "between 1 and 2";
+  } else if (y < 0) {
+    quadrant = "between 3 and 4";
+  } else if (y === 0) {
+    quadrant = "in the middle of the coordinate plane";
+  } else {
+    quadrant = "invalid number";
+  }
+} else {
+  quadrant = "invalid number";
+}
+console.log(quadrant);
+
+// 27.
+let temp = 50;
+let stateOfWater;
+if (temp <= 0) {
+  stateOfWater = "solid";
+} else if (temp > 0 && temp <= 100) {
+  stateOfWater = "liquid";
+} else if (temp > 100) {
+  stateOfWater = "gas";
+} else {
+  stateOfWater = "invalid temperature";
+}
+console.log(stateOfWater);
+
+// 28.
+let month2 = 1;
+let isLeapYear2 = true;
+let daysInMonth2;
+
+switch (month2) {
+  case 1:
+    daysInMonth2 = 31;
+    break;
+  case 2:
+    if (isLeapYear2) {
+      daysInMonth2 = 29;
+    } else {
+      daysInMonth2 = 28;
+    }
+    break;
+  case 3:
+    daysInMonth2 = 31;
+    break;
+  case 4:
+    daysInMonth2 = 30;
+    break;
+  case 5:
+    daysInMonth2 = 31;
+    break;
+  case 6:
+    daysInMonth2 = 30;
+    break;
+  case 7:
+    daysInMonth2 = 31;
+    break;
+  case 8:
+    daysInMonth2 = 31;
+    break;
+  case 9:
+    daysInMonth2 = 30;
+    break;
+  case 10:
+    daysInMonth2 = 31;
+    break;
+  case 11:
+    daysInMonth2 = 30;
+    break;
+  case 12:
+    daysInMonth2 = 31;
+    break;
+  default:
+    console.log("Invalid month");
+    break;
+}
+console.log(daysInMonth2);
+
+// 29.
+let a = 3,
+  b = 4,
+  c = 5;
+let canFormTriangle;
+if (a + b < c || b + c < a || a + c < b || isNaN(a) || isNaN(b) || isNaN(c)) {
+  canFormTriangle = false;
+} else {
+  canFormTriangle = true;
+}
+console.log(canFormTriangle);
+
+// 30.
+let a1 = 3,
+  b1 = 9,
+  c1 = -16;
+let discriminant = b1 * b1 - 4 * a1 * c1;
+if (discriminant < 0) {
+  console.log("No real roots");
+} else if (discriminant === 0) {
+  console.log(-b1 / (a1 * 2));
+} else if (discriminant > 0) {
+  console.log("root 1 - " + (-b1 + Math.sqrt(discriminant)) / (2 * a1));
+  console.log("root 2 - " + (-b1 - Math.sqrt(discriminant)) / (2 * a1));
+} else {
+  console.log("invalid input");
+}
+
+// 31.
+let num3 = 7;
+let parity1 = num3 % 2 === 0 ? "even" : "odd";
+console.log(parity1);
+
+// 32.
+let age3 = 5;
+let canVote1 = age3 >= 18 ? true : false;
+console.log(canVote1);
