@@ -352,9 +352,10 @@ if (
 console.log(isLeapYear1);
 
 // 24.
-let age2 = 63;
-let isEmployed = false;
+let age2 = 25;
+let isEmployed = true;
 let workStatus;
+
 if (age <= 24) {
   workStatus = "Student";
 } else if (age >= 24 && age <= 65) {
@@ -364,7 +365,11 @@ if (age <= 24) {
     workStatus = "Unemployed Adult";
   }
 } else if (age > 65) {
-  workStatus = "Retiree";
+  if (isEmployed === true) {
+    workStatus = "working retiree";
+  } else {
+    workStatus = "not working Retiree";
+  }
 } else {
   console.log("invalid age");
 }
