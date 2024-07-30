@@ -173,18 +173,94 @@ For matrix = [[1, 2, 3], [4, 5, 6]], output: [[1, 4], [2, 5], [3, 6]]
 */
 
 function transposeMatrix(array) {
-  let arr = [[]];
-  for (let i = 0; i < array[i].length; i++) {
-    console.log(i);
-    for (let j = 0; j < array.length - 1; j++) {
-      arr.push([array[j][i]]);
-      console.log("pushed");
+  let arrMain = [];
+  for (let i = 0; i < array[0].length; i++) {
+    let arrSec = [];
+    for (let j = 0; j < array.length; j++) {
+      arrSec.push(array[j][i]);
     }
+    arrMain.push(arrSec);
   }
-  console.log(arr);
+  console.log(arrMain);
 }
 
-// transposeMatrix([
-//   [1, 2, 3],
-//   [4, 5, 6],
-// ]);
+transposeMatrix([
+  [1, 2, 3],
+  [4, 5, 6],
+]);
+
+/*
+Exercise 11: Palindrome Check
+Objective: Check if a given string is a palindrome.
+Instructions:
+Take a string as input.
+Use nested loops to compare characters from the beginning and end of the string.
+Print whether the string is a palindrome.
+Example Output:
+For input = "radar", output: Palindrome
+For input = "hello", output: Not a palindrome
+*/
+function isPalindrome(string) {
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] !== string[string.length - 1 - i]) {
+      return "not a palindrome";
+    } else {
+      return "palindrome";
+    }
+  }
+}
+console.log(isPalindrome("radar"));
+console.log(isPalindrome("hello"));
+console.log(isPalindrome("lappal"));
+
+/*
+Exercise 12: Find Common Elements in Two Arrays
+Objective: Find common elements between two arrays.
+Instructions:
+Create two arrays with numbers.
+Use nested loops to find and print the common elements.
+Example Output:
+For arr1 = [1, 2, 3, 4] and arr2 = [3, 4, 5, 6], output: Common elements: 3, 4
+*/
+
+function findCommon(arr1, arr2) {
+  let ans = "Common elements: ";
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] === arr2[j]) {
+        ans += `${arr1[i]}, `;
+      }
+    }
+  }
+  console.log(ans);
+}
+findCommon([1, 2, 3, 4], [3, 4]);
+
+/*
+Exercise 13: Check for Prime Numbers in a Range
+Objective: Write a program to find all prime numbers in a given range.
+Instructions:
+Take a range (start and end) as input.
+Use nested loops to check each number in the range.
+Print the prime numbers found.
+Example Output:
+For range = (10, 20), output: Prime numbers: 11, 13, 17, 19
+*/
+
+function primeInRange(start, end) {
+  let ans = "";
+  for (let i = start; i <= end; i++) {
+    let isPrime = true;
+    for (let j = 2; j <= Math.sqrt(i); j++) {
+      if (i % j === 0 || i === 2) {
+        isPrime = false;
+        break;
+      }
+    }
+    if (isPrime) {
+      ans += `${i}, `;
+    }
+  }
+  console.log(ans);
+}
+//primeInRange(10, 30);
