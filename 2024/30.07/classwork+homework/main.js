@@ -264,3 +264,41 @@ function primeInRange(start, end) {
   console.log(ans);
 }
 //primeInRange(10, 30);
+
+/*
+Exercise 14: Sort a 2D Array by Row Sum
+Objective: Sort the rows of a 2D array based on the sum of their elements.
+Instructions:
+Create a 2D array with numbers.
+Use nested loops to calculate the sum of each row.
+Sort the rows based on their sum and print the sorted array.
+Example Output:
+For arr = [[3, 1, 2], [1, 4, 5], [2, 3, 1]], output: [[2, 3, 1], [3, 1, 2], [1, 4, 5]]
+*/
+
+function sumRow(row) {
+  let sum = 0;
+  for (let i = 0; i < row.length; i++) {
+    sum += row[i];
+  }
+  return sum;
+}
+
+function sortBySum(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      if (sumRow(arr[i]) < sumRow(arr[j])) {
+        let temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+      }
+    }
+  }
+  console.log(arr);
+}
+sortBySum([
+  [5, 3, 4],
+  [2, 5, 4],
+  [1, 1, 1],
+  [2, 1, 1],
+]);
