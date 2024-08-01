@@ -119,21 +119,20 @@ Example Output:
 For input = "hello", output: h: 1, e: 1, l: 2, o: 1
 */
 function charFreq(string) {
-  let duplicateChar = null;
+  let output = {};
+  string = string.toLowerCase();
+
   for (let i = 0; i < string.length; i++) {
-    let char = string[i];
-    let count = 0;
-    if (char === " ") continue;
-    for (let j = 0; j < string.length; j++) {
-      if (string[j] === char) {
-        count++;
-        if (count > 1) duplicateChar = char;
-      }
+    if (string[i] === " ") continue;
+    if (!output[string[i]]) {
+      output[string[i]] = 1;
+    } else {
+      output[string[i]]++;
     }
-    console.log(`${char} : ${count}`);
   }
+  console.log(output);
 }
-charFreq("hello world");
+charFreq("hello");
 
 /*
 Exercise 9: Flatten a 2D Array
