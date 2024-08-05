@@ -298,3 +298,30 @@ let wordCounter = {
 };
 console.log(wordCounter.countWords());
 wordCounter.getFreqWords(3);
+
+// 24.
+let calculator = {
+  result: 0,
+  add(n) {
+    this.result += n;
+    return this;
+  },
+  subtract(n) {
+    this.result -= n;
+    return this;
+  },
+  multiply(n) {
+    this.result *= n;
+    return this;
+  },
+  divide(n) {
+    this.result /= n;
+    return this;
+  },
+  clear() {
+    this.result = 0;
+    return this;
+  },
+};
+calculator.add(5).multiply(5).subtract(2);
+console.log(calculator.result);
