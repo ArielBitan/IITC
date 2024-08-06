@@ -325,3 +325,107 @@ let calculator = {
 };
 calculator.add(5).multiply(5).subtract(2);
 console.log(calculator.result);
+
+// 25.
+const game = {
+  playerScore: 0,
+  computerScore: 0,
+  play(playerChoice) {
+    playerChoice = playerChoice.toLowerCase();
+    const computerChoice = this.getComputerChoice();
+
+    return this.determineWinner(playerChoice, computerChoice);
+  },
+  getComputerChoice() {
+    const choices = ["rock", "paper", "scissors"];
+    return choices[Math.floor(Math.random() * 3)];
+  },
+  determineWinner(player, computer) {
+    if (player === computer) {
+      return `Tie , you both picked ${player}`;
+    } else if (player === "rock") {
+      if (computer === "paper") {
+        this.computerScore++;
+        return `Computer won! the score is ${this.playerScore}:${this.computerScore}`;
+      } else if (computer === "scissors") {
+        this.playerScore++;
+        return `You won! the score is ${this.playerScore}:${this.computerScore}`;
+      }
+    } else if (player === "paper") {
+      if (computer === "scissors") {
+        this.computerScore++;
+        return `Computer won! the score is ${this.playerScore}:${this.computerScore}`;
+      } else if (computer === "rock") {
+        this.playerScore++;
+        return `You won! the score is ${this.playerScore}:${this.computerScore}`;
+      }
+    } else if (player === "scissors") {
+      if (computer === "rock") {
+        this.computerScore++;
+        return `Computer won! the score is ${this.playerScore}:${this.computerScore}`;
+      } else if (computer === "paper") {
+        this.playerScore++;
+        return `You won! the score is ${this.playerScore}:${this.computerScore}`;
+      }
+    } else {
+      return "Invalid input";
+    }
+  },
+};
+// console.log(game.play("scissors"));
+// console.log(game.play("paper"));
+// console.log(game.play("rock"));
+// console.log(game.play("rock"));
+
+// 26.
+const bmiCalculator = {
+  weight: 0,
+  height: 0,
+  setMetricUnits(weight, height) {
+    height = height / 100;
+
+    this.weight = weight;
+    this.height = height;
+    const bmi = this.weight / Math.pow(this.height, 2);
+
+    return this.calculate(bmi);
+  },
+  setImperialUnits(weight, height) {
+    this.weight = weight;
+    this.height = height;
+    return this.calculate((703 * weight) / Math.pow(height, 2));
+  },
+  calculate(bmi) {
+    if (bmi <= 18.5) {
+      return "Underweight";
+    } else if (bmi > 18.5 && bmi <= 24.5) {
+      return "Healthy Weight";
+    } else if (bmi > 24.5 && bmi < 30) {
+      return "Overweight";
+    } else if (bmi >= 30) {
+      return "Obese";
+    } else {
+      return "Invalid BMI";
+    }
+  },
+};
+
+// const result = bmiCalculator.setMetricUnits(60, 160);
+// console.log(bmiCalculator.setImperialUnits(100, 64));
+// console.log(result);
+
+const timeConverter = {
+  seconds: 0,
+  setTime(seconds) {
+    this.seconds = seconds;
+  },
+  getHours() {
+    return `${this.seconds / 3600} hours`;
+  },
+  getMinutes() {
+    return `${this.seconds / 60} minutes`;
+  },
+};
+
+timeConverter.setTime(600);
+console.log(timeConverter.getHours());
