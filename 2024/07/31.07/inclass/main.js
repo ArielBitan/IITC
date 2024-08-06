@@ -30,6 +30,7 @@ let person = {
     person.name = name;
   },
 };
+
 console.log(person.name);
 person.changeName("David");
 console.log(person.name);

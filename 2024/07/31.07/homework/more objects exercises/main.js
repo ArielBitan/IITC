@@ -427,5 +427,5 @@ const timeConverter = {
   },
 };
 
-timeConverter.setTime(600);
-console.log(timeConverter.getHours());
+// timeConverter.setTime(600);
+// console.log(timeConverter.getHours());
