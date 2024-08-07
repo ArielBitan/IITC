@@ -429,3 +429,38 @@ const timeConverter = {
 
 // timeConverter.setTime(600);
 // console.log(timeConverter.getHours());
+
+const shoppingCart = {
+  items: [
+    { name: "banana", price: 1000, quantity: 5 },
+    { name: "apple", price: 700, quantity: 2 },
+    { name: "phone", price: 500, quantity: 87 },
+    { name: "desk", price: 10010, quantity: 1 },
+  ],
+  total: 0,
+  addItem(name, price, quantity) {
+    this.items.push({ name, price, quantity });
+  },
+  removeItem(name) {
+    this.items = this.items.filter((value) => value.name !== name);
+  },
+  calculateTotal() {
+    this.total = this.items.reduce(function (sum, value) {
+      return sum + value.price;
+    }, 0);
+    return this.total;
+  },
+};
+shoppingCart.addItem("computer", 150, 1);
+console.log(shoppingCart.items);
+shoppingCart.removeItem("phone");
+console.log(shoppingCart.items);
+console.log(shoppingCart.calculateTotal());
+
+// 30
+const stopwatch = {
+  startTime: Date.now,
+  isRunning: false,
+  elapsedTime: 0,
+  start() {},
+};
