@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        border: 5px solid blue;
+        background-color: yellow;
+        margin-bottom: 1cm;
+      }
+
+      button {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        background-color: rgb(175, 4, 255);
+        color: rgba(255, 255, 255, 0.954);
+        font-size: 20px;
+        border: none;
+        letter-spacing: 1.5px;
+        margin-bottom: 0.7cm;
+        width: 3.5cm;
+        height: 1.2cm;
+      }
+      .second-button {
+        border-radius: 25px;
+        width: 2.5cm;
+      }
+      li {
+        padding: 0.3cm;
+        font-size: 25px;
+        color: red;
+      }
+      .third-sentence {
+        background-color: grey;
+        color: white;
+        border-radius: 10px;
+      }
+      .text-section {
+        padding: 15px;
+        margin-left: -25px;
+      }
+
+      .square-section {
+        padding: 50px;
+      }
+      .circle-section {
+        padding: 25px;
+      }
+      .circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .circle.red {
+        background-color: red;
+      }
+      .circle.green {
+        background-color: green;
+      }
+      .circle.blue {
+        background-color: blue;
+      }
+      ul > li {
+        list-style-type: none;
+      }
+
+      .red-square {
+        margin-inline: auto;
+        padding: 25px;
+        background-color: red;
+        width: 450px;
+        height: 200px;
+        position: relative;
+      }
+
+      .left-box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding-block: 10px;
+        padding-inline: 15px;
+        font-size: 20px;
+        color: white;
+        background-color: black;
+      }
+      .right-box {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        padding-block: 10px;
+        padding-inline: 15px;
+        font-size: 20px;
+        color: white;
+        background-color: black;
+        width: fit-content;
+      }
+      .middle-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        padding-inline: 15px;
+        padding-block: 12px;
+        border-radius: 50%;
+        background-color: black;
+        box-shadow: 7px 8px 12px rgba(255, 255, 255, 0.767);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="text-section">
+        <ul>
+          <li>1st Lorem ipsum dolor sit amet consectetur</li>
+          <li>
+            2nd Lorem ipsum dolor <span style="color: black">BLACK</span>sit
+            amet consectetur
+          </li>
+          <li class="third-sentence">
+            3rd Lorem ipsum dolor sit amet consectetur
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="circle-section">
+        <span class="circle red"></span>
+        <span class="circle blue"></span>
+        <span class="circle green"></span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="square-section">
+        <div class="red-square">
+          <div class="left-box">left</div>
+          <div class="right-box">right</div>
+          <div class="middle-box">middle</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="first-button">EXPLORE</button>
+    <button class="second-button">JOIN</button>
+  </body>
+</html>
