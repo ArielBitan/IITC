@@ -1,0 +1,152 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.inter-bold {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.inter-light {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.lexend-deca {
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.image2 {
+  display: none;
+}
+
+.image1 {
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  filter: opacity(0.5) drop-shadow(0 0 0 hsl(277, 64%, 61%));
+}
+
+body {
+  background-color: hsl(233, 47%, 7%);
+  padding-inline: 24px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-wrap: wrap;
+}
+
+.purple-text {
+  color: hsl(277, 64%, 61%);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-area {
+  padding: 2rem;
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(244, 38%, 16%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 2rem;
+  text-align: center;
+}
+
+.large-text {
+  font-size: 28px;
+}
+
+.description {
+  color: hsla(0, 0%, 100%, 0.6);
+  font-size: 16px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.stat-number {
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-name {
+  color: hsla(0, 0%, 100%, 0.6);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding-block-start: 6px;
+}
+
+@media (min-width: 1000px) {
+  body {
+    padding-block: 2rem;
+  }
+  .image1 {
+    display: none;
+  }
+  .image2 {
+    display: block;
+  }
+
+  .image2 {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    flex: 1;
+    filter: opacity(0.5) drop-shadow(0 0 0 hsl(277, 64%, 61%));
+  }
+
+  .content {
+    flex-direction: row-reverse;
+    justify-content: start;
+  }
+
+  .text-area {
+    flex: 1;
+    gap: 3rem;
+    text-align: start;
+    padding: 5rem;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .large-text {
+    font-size: 50px;
+  }
+
+  .description {
+    font-size: 20px;
+    padding-inline-end: 8rem;
+  }
+
+  .stats {
+    flex-direction: row;
+    margin-inline-end: auto;
+    margin-block-start: auto;
+
+    gap: 6rem;
+  }
+  .stat-name {
+    font-size: 1rem;
+  }
+}
