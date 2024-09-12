@@ -1,0 +1,148 @@
+@font-face {
+  font-family: young-serif;
+  src: url(./assets/fonts/young-serif/YoungSerif-Regular.ttf);
+}
+
+@font-face {
+  font-family: outfit;
+  src: url(./assets/fonts/outfit/Outfit-VariableFont_wght.ttf);
+}
+
+:root {
+  --color-white: hsl(0, 0%, 100%);
+  --color-stone-100: hsl(30, 54%, 90%);
+  --color-stone-150: hsl(30, 18%, 87%);
+  --color-stone-600: hsl(30, 10%, 34%);
+  --color-stone-900: hsl(24, 5%, 18%);
+  --color-brown-800: hsl(14, 45%, 36%);
+  --color-rose-800: hsl(332, 51%, 32%);
+  --color-rose-50: hsl(330, 100%, 98%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: outfit;
+  font-weight: 400;
+  color: var(--color-stone-600);
+}
+
+body,
+html {
+  height: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+li::marker {
+  color: var(--color-brown-800);
+  font-family: outfit;
+  font-weight: 700;
+}
+
+li {
+  padding-block-end: 0.8rem;
+}
+
+span {
+  font-weight: 600;
+}
+
+hr {
+  margin-block: 1rem;
+}
+
+h1 {
+  font-family: young-serif;
+  font-size: 2rem;
+  line-height: 2rem;
+  padding-bottom: 1.825rem;
+}
+
+h2 {
+  color: var(--color-brown-800);
+  font-family: young-serif;
+  font-weight: 500;
+  padding-block: 1rem;
+}
+
+.main-content {
+  margin: 1.5rem;
+}
+
+.main-content {
+  max-width: 325px;
+}
+
+.prep-time-section {
+  background-color: var(--color-rose-50);
+  padding: 1rem;
+  margin-block-start: 1.825rem;
+}
+
+.prep-time-section ul {
+  color: var(--color-rose-800);
+  font-weight: 600;
+  font-size: 1.2rem;
+  list-style-position: outside;
+}
+
+.prep-time-section ul li {
+  color: black;
+  font-family: outfit;
+  font-weight: 300;
+  margin-inline-start: 1rem;
+  text-indent: 1rem;
+  text-align: start;
+  font-size: 1rem;
+  padding-block-start: 1rem;
+}
+
+.ingredients ul {
+  text-indent: 1rem;
+  list-style-position: outside;
+}
+.instructions ol {
+  list-style-position: outside;
+  padding-inline: 20px;
+}
+
+.nutrition {
+  padding-block-end: 4rem;
+}
+
+.nutrition p {
+  padding-block-end: 1.5rem;
+}
+
+.nutrition-item span {
+  color: var(--color-brown-800);
+  font-weight: 600;
+}
+.nutrition-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  text-align: start;
+}
+
+@media (min-width: 1024px) {
+  html {
+    height: 100%;
+  }
+
+  .main-content {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
