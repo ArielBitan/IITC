@@ -38,7 +38,8 @@ html {
 
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
+  height: auto; /* Add this */
 }
 
 li::marker {
@@ -57,10 +58,12 @@ span {
 
 hr {
   margin-block: 1rem;
+  border-top: 3rem var(--color-stone-900);
 }
 
 h1 {
   font-family: young-serif;
+  color: var(--color-stone-900);
   font-size: 2rem;
   line-height: 2rem;
   padding-bottom: 1.825rem;
@@ -73,12 +76,16 @@ h2 {
   padding-block: 1rem;
 }
 
-.main-content {
-  margin: 1.5rem;
+.preview-img {
+  margin-block-end: 2rem;
+  width: 100%; /* Ensures full width */
+  max-height: 100%; /* Prevents overflow */
+  overflow: hidden; /* Ensures no content overflow */
 }
 
 .main-content {
-  max-width: 325px;
+  position: relative;
+  margin-inline: 1.5rem;
 }
 
 .prep-time-section {
@@ -95,14 +102,14 @@ h2 {
 }
 
 .prep-time-section ul li {
-  color: black;
+  color: var(--color-stone-600);
   font-family: outfit;
   font-weight: 300;
-  margin-inline-start: 1rem;
-  text-indent: 1rem;
-  text-align: start;
-  font-size: 1rem;
+  text-align: left;
+  margin-inline-start: 1.5rem;
+  padding-inline-end: 3rem;
   padding-block-start: 1rem;
+  font-size: 1rem;
 }
 
 .ingredients ul {
@@ -134,15 +141,49 @@ h2 {
 }
 
 @media (min-width: 1024px) {
-  html {
-    height: 100%;
+  body {
+    background-color: var(--color-stone-100);
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .main-content {
-    max-width: 1200px;
+  .page-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding-block: 8rem;
+    padding-inline: 10rem;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+  }
+
+  .prep-time-section ul li {
+    line-height: 0.5rem;
+  }
+  .preview-img img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Or use 'contain' if you prefer not to crop the image */
+    border-radius: 1rem; /* Matches your existing border radius */
+  }
+
+  .main-content {
+    width: 100%;
+    border-radius: 1rem;
+    background-color: white;
+    padding: 3rem;
+  }
+  .nutrition-table > :not(hr) {
+    padding-inline-end: 20rem;
+    padding-inline-start: 3rem;
+  }
+  .nutrition-item {
+    text-align: center;
+    justify-content: space-between;
+    gap: 20rem;
   }
 }
