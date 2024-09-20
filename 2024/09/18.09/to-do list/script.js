@@ -16,16 +16,12 @@ let gToDoList = [
   },
 ];
 
+let currentFilter = null;
+
 const elForm = document.querySelector("form");
 const elToDoList = document.getElementById("toDoList");
 
 elToDoList.addEventListener("click", (ev) => markTaskDone(ev));
-
-function markTaskDone(ev) {
-  ev.target.classList.toggle("is-done");
-  const task = gToDoList.find((listing) => listing.id === taskId);
-  task.isDone = !task.isDone;
-}
 
 elForm.addEventListener("submit", function (ev) {
   ev.preventDefault();
@@ -33,6 +29,29 @@ elForm.addEventListener("submit", function (ev) {
   createListing(contentValue);
   elForm.reset();
 });
+
+document.getElementById("displayAll").addEventListener("click", () => {
+  currentFilter = null;
+  renderToDoList(currentFilter);
+});
+document.getElementById("displayCompleted").addEventListener("click", () => {
+  currentFilter = true;
+  renderToDoList(currentFilter);
+});
+document.getElementById("displayNotCompleted").addEventListener("click", () => {
+  currentFilter = false;
+  renderToDoList(currentFilter);
+});
+
+function markTaskDone(ev) {
+  ev.target.classList.toggle("is-done");
+
+  const task = gToDoList.find(
+    (listing) => "el-" + listing.id === ev.target.parentElement.id
+  );
+  task.isDone = !task.isDone;
+  renderToDoList(currentFilter);
+}
 
 // DELETE
 function deleteListing(listingId) {
@@ -52,36 +71,25 @@ function deleteListing(listingId) {
   elToDoList.removeChild(elListingToDelete);
 }
 
-function renderToDoList() {
-  elToDoList.innerHTML = "";
-  for (let i = 0; i < gToDoList.length; i++) {
-    const listing = gToDoList[i];
-    const elListing = document.createElement("li");
-    elListing.setAttribute("id", "el-" + listing.id);
-
-    elListing.innerHTML = `
-    <span>${listing.content}</span>
-    <button onclick="deleteListing('${listing.id}')">Delete</button>
-    `;
-    elToDoList.appendChild(elListing);
-  }
-}
-
-function displayCompleteTasks() {
-  console.log(gToDoList);
-
+function renderToDoList(filter = false) {
   elToDoList.innerHTML = "";
 
   for (let i = 0; i < gToDoList.length; i++) {
     const listing = gToDoList[i];
-    console.log(listing.isDone);
-    if (!listing.isDone) continue;
+
+    if (filter === true && !listing.isDone) continue;
+    if (filter === false && listing.isDone) continue;
+
     const elListing = document.createElement("li");
     elListing.setAttribute("id", "el-" + listing.id);
 
+    if (listing.isDone) {
+      elListing.classList.add("is-done");
+    }
+
     elListing.innerHTML = `
-    <span>${listing.content}</span>
-    <button onclick="deleteListing('${listing.id}')">Delete</button>
+      <span>${listing.content}</span>
+      <button onclick="deleteListing('${listing.id}')">Delete</button>
     `;
     elToDoList.appendChild(elListing);
   }
