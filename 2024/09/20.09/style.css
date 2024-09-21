@@ -4,6 +4,26 @@ table {
   width: 70%;
 }
 
+.container {
+  display: flex;
+  align-items: start;
+  gap: 3rem;
+}
+
+li {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.remove-btn {
+  width: 100%;
+  padding-block: 1.5rem;
+  box-sizing: border-box;
+}
+li button {
+  padding: 1rem;
+  margin-left: 2rem;
+}
+
 td,
 th {
   border: 1px solid #dddddd;

@@ -1,20 +1,29 @@
 const products = [
-  { id: 1, name: "Laptop", price: 1000, quantity: 0 },
-  { id: 2, name: "Smartphone", price: 600, quantity: 0 },
-  { id: 3, name: "Headphones", price: 100, quantity: 0 },
-  { id: 4, name: "Keyboard", price: 50, quantity: 0 },
-  { id: 5, name: "Mouse", price: 30, quantity: 0 },
-  { id: 6, name: "Monitor", price: 300, quantity: 0 },
-  { id: 7, name: "Printer", price: 150, quantity: 0 },
-  { id: 8, name: "Webcam", price: 80, quantity: 0 },
-  { id: 9, name: "USB Cable", price: 10, quantity: 0 },
-  { id: 10, name: "External Hard Drive", price: 120, quantity: 0 },
+  { id: 1, name: "Laptop", price: 1000 },
+  { id: 2, name: "Smartphone", price: 600 },
+  { id: 3, name: "Headphones", price: 100 },
+  { id: 4, name: "Keyboard", price: 50 },
+  { id: 5, name: "Mouse", price: 30 },
+  { id: 6, name: "Monitor", price: 300 },
+  { id: 7, name: "Printer", price: 150 },
+  { id: 8, name: "Webcam", price: 80 },
+  { id: 9, name: "USB Cable", price: 10 },
+  { id: 10, name: "External Hard Drive", price: 120 },
 ];
+let addedProductsSerialized;
+let addedProductsDeserielized;
+addedProductsDeserielized = JSON.parse(localStorage.getItem("addedProducts"));
 
-const addedProducts = [];
+let addedProducts = [];
 
 const elProductsList = document.getElementById("productsList");
 const elProductsTable = document.getElementById("productsTable");
+
+if (addedProductsDeserielized) {
+  addedProducts = addedProductsDeserielized;
+  renderProductsList();
+  calculateTotal();
+}
 
 renderAddProductsList();
 
@@ -54,11 +63,17 @@ function renderProductsList() {
 // find the product using the productId, if it doesn't exist in the 'cart' add it , else add 1 to it's quantity,then render the table and calc total.
 function addItem(productId) {
   const product = products.find((value) => value.id === productId);
+  const addedProduct = addedProducts.find((value) => value.id === productId);
 
-  if (!addedProducts.find((value) => value.id === productId)) {
-    addedProducts.push(product);
+  if (!addedProduct) {
+    const productToAdd = { ...product, quantity: 1 };
+    addedProducts.push(productToAdd);
+  } else {
+    addedProduct.quantity++;
   }
-  product.quantity++;
+
+  addedProductsSerialized = JSON.stringify(addedProducts);
+  localStorage.setItem("addedProducts", addedProductsSerialized);
 
   renderProductsList();
   calculateTotal();
@@ -76,6 +91,8 @@ function removeItem(rowId) {
 
   addedProducts.splice(productIndex, 1);
   calculateTotal();
+  addedProductsSerialized = JSON.stringify(addedProducts);
+  localStorage.setItem("addedProducts", addedProductsSerialized);
 }
 
 function calculateTotal() {
