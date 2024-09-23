@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --color-moderate-violet: hsl(263, 55%, 52%);
+  --color-dark-blue: hsl(217, 19%, 35%);
+  --color-dark-black-blue: hsl(219, 29%, 14%);
+  --color-white: hsl(0, 0%, 100%);
+
+  --color-neutral-lgray: hsl(0, 0%, 81%);
+  --color-neutral-grayish-blue: hsl(210, 46%, 95%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.barlow-semi-condensed-semibold {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+img {
+  width: 30px;
+  border-radius: 50%;
+  height: 30px;
+  border-style: solid;
+}
+
+body {
+  background-color: var(--color-neutral-lgray);
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 13px;
+  color: var(--color-white);
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  padding-block: 4rem;
+  padding-inline: 1.5rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.img-and-name {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.low-opacity-white {
+  opacity: 50%;
+}
+
+p {
+  opacity: 70%;
+}
+
+article {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.grid-item {
+  border-radius: 0.5rem;
+  padding-block: 2rem;
+  padding-inline: 2.5rem;
+}
+
+.grid-item-1 {
+  background-color: var(--color-moderate-violet);
+  background-image: url("./images/bg-pattern-quotation.svg");
+  background-repeat: no-repeat;
+  background-position: top right 1rem;
+}
+
+.grid-item-2 {
+  background-color: var(--color-dark-blue);
+}
+
+.grid-item-3 {
+  background-color: var(--color-white);
+  color: var(--color-dark-blue);
+}
+
+.grid-item-4 {
+  background-color: var(--color-dark-black-blue);
+}
+
+.grid-item-5 {
+  background-color: var(--color-white);
+  color: var(--color-dark-blue);
+}
+
+@media (min-width: 1024px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    padding-inline: 8rem;
+  }
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .grid-item-1 {
+    grid-column: span 2;
+    background-position: top right 5rem;
+  }
+
+  .grid-item-4 {
+    grid-column: span 2;
+  }
+  .grid-item-5 {
+    grid-column-start: 4;
+    grid-row: 1 / span 2;
+  }
+}
