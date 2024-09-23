@@ -16,21 +16,15 @@
   padding: 0;
 }
 
-.barlow-semi-condensed-semibold {
-  font-family: "Barlow Semi Condensed", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
 body,
 html {
   height: 100%;
 }
 
 img {
-  width: 30px;
   border-radius: 50%;
-  height: 30px;
+  width: 2rem;
+  height: 2rem;
   border-style: solid;
 }
 
@@ -69,6 +63,9 @@ p {
 article {
   font-size: 1.2rem;
   margin-bottom: 1rem;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .grid-item {
