@@ -1,6 +1,6 @@
 import { utils } from "./utils.js";
 
-const employeesList = [
+let employeesList = [
   {
     id: utils.makeId(),
     firstName: "Alice",
@@ -53,10 +53,20 @@ function getEmployees() {
 }
 
 function addEmployee(employee) {
-  employeesList.push(employee);
+  let newEmployee = { id: utils.makeId(), ...employee };
+  employeesList.push(newEmployee);
+  console.log(employeesList);
 }
 
-function removeEmployee() {}
+function removeEmployee(employee) {
+  const employeeIndex = employeesList.findIndex(
+    (element) => element.id === employee.id
+  );
+  console.log(employeeIndex);
+
+  employeesList.splice(employeeIndex, 1);
+  console.log(employeesList);
+}
 
 export const employees = {
   getEmployees,

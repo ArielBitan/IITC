@@ -9,7 +9,6 @@
   <body>
     <table id="employeesTable">
       <tr>
-        <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Age</th>
@@ -18,26 +17,26 @@
         <th>Salary</th>
       </tr>
     </table>
-    <form>
-      <label for="firstname">First name: </label>
-      <input type="text" id="firstname" required />
+    <form id="form">
+      <label for="firstName">First name: </label>
+      <input type="text" id="firstName" name="firstName" required />
 
-      <label for="lastname">Last name: </label>
-      <input type="text" id="lastname" required />
+      <label for="lastName">Last name: </label>
+      <input type="text" id="lastName" name="lastName" required />
 
       <label for="age">Age: </label>
-      <input type="number" id="age" required />
+      <input type="number" id="age" name="ageName" required />
 
-      <label for="start-date">Start Date: </label>
-      <input type="date" id="start-date" required />
+      <label for="startDate">Start Date: </label>
+      <input type="date" id="startDate" name="startDate" required />
 
       <label for="department">Department: </label>
-      <input type="text" id="department" required />
+      <input type="text" id="department" name="department" required />
 
       <label for="salary">Salary: </label>
-      <input type="number" id="salary" required />
+      <input type="number" id="salary" name="salary" required />
 
-      <input type="submit" value="Submit" id="sumbitBtn" />
+      <button id="submitBtn">Submit</button>
     </form>
     <script type="module" src="./controller.js"></script>
   </body>
