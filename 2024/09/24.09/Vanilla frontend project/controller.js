@@ -2,6 +2,11 @@ import { employees } from "./employees.js";
 
 renderEmployeesList();
 
+const filterInput = document.getElementById("filterInput");
+filterInput.addEventListener("input", function () {
+  renderEmployeesList(filterInput.value);
+});
+
 const submitForm = document.getElementById("form");
 submitForm.addEventListener("submit", function (ev) {
   ev.preventDefault();
@@ -16,7 +21,7 @@ submitForm.addEventListener("submit", function (ev) {
   submitForm.reset();
 });
 
-function renderEmployeesList() {
+function renderEmployeesList(filter = "") {
   const elEmployeesTable = document.getElementById("employeesTable");
   const employeesList = employees.getEmployees();
   let count = 0;
@@ -31,16 +36,21 @@ function renderEmployeesList() {
 
   // loop our employee list
   for (let i = 0; i < employeesList.length; i++) {
-    // if this row already exists continue
-    if (document.querySelector("#row-" + employeesList[i].id)) {
+    const currentEmployee = employeesList[i];
+
+    // if this row already exists continue or if filter doesn't align continue
+    if (
+      document.querySelector("#row-" + currentEmployee.id) ||
+      !currentEmployee.department.toLowerCase().includes(filter.toLowerCase())
+    ) {
       continue;
     }
+
     // insert new row into the table after the header row
     let totalRowIndex = elEmployeesTable.rows.length;
     let newRow = elEmployeesTable.insertRow(totalRowIndex);
     newRow.setAttribute("id", "row-" + employeesList[i].id);
 
-    const currentEmployee = employeesList[i];
     const employeeValues = Object.values(currentEmployee);
 
     // iterate each value in the current employee object and insert cell for each value

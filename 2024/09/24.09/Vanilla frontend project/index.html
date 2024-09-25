@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="contaier">
+    <div class="container">
+      <div class="filter-container">   
+
+      <label for="department">Department: </label>
+      <input type="text" id="filterInput" name="department" required />
+      <button type="submit" class="btn" id="filterBtn">Filter</button>
+
+      </div>
       <div class="table-wrapper">
         <table id="employeesTable">
           <tr>
@@ -19,8 +26,6 @@
             <th>Salary</th>
           </tr>
         </table>
-        <button id="filterBtn">Filter</button>
-      </div>
       <button class="open-button" onclick="toggleForm()">Add Employee</button>
       <div class="form-popup" id="myForm">
         <form id="form" class="form-container">
@@ -47,12 +52,18 @@
         </form>
       </div>
     </div>
+  </div>
     <script type="module" src="./controller.js"></script>
     <script>
       function toggleForm() {
         document.getElementById("myForm").style.display === "block" ? 
         document.getElementById("myForm").style.display = "none":
         document.getElementById("myForm").style.display="block"
+      }
+      function toggleFilterForm() {
+        document.getElementById("myFilterForm").style.display === "block" ? 
+        document.getElementById("myFilterForm").style.display = "none":
+        document.getElementById("myFilterForm").style.display="block"
       }
     </script>
   </body>
