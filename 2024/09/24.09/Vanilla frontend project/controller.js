@@ -18,9 +18,13 @@ submitForm.addEventListener("submit", function (ev) {
 function renderEmployeesList() {
   const elEmployeesTable = document.getElementById("employeesTable");
   const employeesList = employees.getEmployees();
-
+  let count = 0;
   while (elEmployeesTable.rows.length > 1) {
+    if (document.querySelector("edit-" + employeesList[count].id)) {
+      continue;
+    }
     elEmployeesTable.deleteRow(1);
+    count++;
   }
 
   for (let i = 0; i < employeesList.length; i++) {
@@ -34,32 +38,84 @@ function renderEmployeesList() {
     const currentEmployee = employeesList[i];
 
     for (let j = 1; j < Object.values(currentEmployee).length; j++) {
-      const employeeKeys = Object.values(currentEmployee);
-      newRow.insertCell().innerHTML = employeeKeys[j];
+      const employeeValues = Object.values(currentEmployee);
+      const input = document.createElement("INPUT");
+
+      newRow.insertCell().innerHTML = employeeValues[j];
     }
     addInteractButtons(newRow, currentEmployee);
   }
 }
 
 function addInteractButtons(newRow, currentEmployee) {
+  let editBtn = null;
+  let editRow = null;
+
+  // create edit button
+  editBtn = document.createElement("BUTTON");
+  editBtn.className = "edit-btn";
+  editBtn.innerHTML = "Edit";
+  editBtn.addEventListener("click", function () {
+    const elEmployeesTable = document.getElementById("employeesTable");
+
+    // check if there is an existing row already
+    if (!editRow) {
+      editRow = elEmployeesTable.insertRow(newRow.rowIndex + 1);
+      editRow.classList.add("edit-" + currentEmployee.id);
+
+      const employeeValues = Object.values(currentEmployee);
+
+      // get all elements except the submit button
+      for (let i = 0; i < submitForm.elements.length - 1; i++) {
+        const input = document.createElement("INPUT");
+        input.setAttribute("type", submitForm.elements[i].type || "text");
+        input.setAttribute("name", submitForm.elements[i].name);
+        input.value = employeeValues[i + 1];
+
+        input.classList.add("edit-input");
+
+        let editValueCell = editRow.insertCell();
+        editValueCell.appendChild(input);
+      }
+
+      editBtn.innerHTML = "Save";
+    } else {
+      // entering else means there is an edit row open meaning the user clicked the 'save' button
+      const inputs = editRow.querySelectorAll(".edit-input");
+
+      const updatedEmployee = {};
+      inputs.forEach((input) => {
+        updatedEmployee[input.name] = input.value;
+        console.log(updatedEmployee);
+      });
+
+      employees.editEmployee(currentEmployee, updatedEmployee);
+      editRow.remove();
+      editRow = null;
+
+      editBtn.innerHTML = "Edit"; // make the button back to 'edit' button so next time the user presses it it will open editRow again
+
+      //renderEmployeesList();
+    }
+  });
+
+  let editEmployeeCell = newRow.insertCell(newRow.cells.length);
+  editEmployeeCell.appendChild(editBtn);
+
   let removeBtn;
   removeBtn = document.createElement("BUTTON");
   removeBtn.className = "remove-btn";
   removeBtn.innerHTML = "Remove";
   removeBtn.addEventListener("click", function () {
+    newRow.remove();
+    if (editRow) {
+      editRow.remove();
+    }
+
     employees.removeEmployee(currentEmployee);
     renderEmployeesList();
   });
-  let removeEmployee = newRow.insertCell(currentEmployee.length);
-  removeEmployee.appendChild(removeBtn);
 
-  let editBtn;
-  editBtn = document.createElement("BUTTON");
-  editBtn.className = "edit-btn";
-  editBtn.innerHTML = "Edit";
-  editBtn.addEventListener("click", function () {
-    editItem(newRow.id);
-  });
-  let editEmployee = newRow.insertCell(currentEmployee.length);
-  editEmployee.appendChild(editBtn);
+  let removeEmployeeCell = newRow.insertCell(newRow.cells.length);
+  removeEmployeeCell.appendChild(removeBtn);
 }
