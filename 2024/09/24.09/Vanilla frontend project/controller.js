@@ -21,6 +21,7 @@ function renderEmployeesList() {
   const employeesList = employees.getEmployees();
   let count = 0;
   while (elEmployeesTable.rows.length > 1) {
+    // if its an edit row don't delete it
     if (document.querySelector("edit-" + employeesList[count].id)) {
       continue;
     }
@@ -28,20 +29,25 @@ function renderEmployeesList() {
     count++;
   }
 
+  // loop our employee list
   for (let i = 0; i < employeesList.length; i++) {
+    // if this row already exists continue
     if (document.querySelector("#row-" + employeesList[i].id)) {
       continue;
     }
+    // insert new row into the table after the header row
     let totalRowIndex = elEmployeesTable.rows.length;
     let newRow = elEmployeesTable.insertRow(totalRowIndex);
     newRow.setAttribute("id", "row-" + employeesList[i].id);
 
     const currentEmployee = employeesList[i];
+    const employeeValues = Object.values(currentEmployee);
 
-    for (let j = 1; j < Object.values(currentEmployee).length; j++) {
-      const employeeValues = Object.values(currentEmployee);
+    // iterate each value in the current employee object and insert cell for each value
+    for (let j = 1; j < employeeValues.length; j++) {
       newRow.insertCell().innerHTML = employeeValues[j];
     }
+
     addInteractButtons(newRow, currentEmployee);
   }
 }
@@ -51,26 +57,7 @@ function addInteractButtons(newRow, currentEmployee) {
   addRemoveButton(newRow, currentEmployee);
 }
 
-function addRemoveButton(newRow, currentEmployee) {
-  let removeBtn;
-  removeBtn = document.createElement("BUTTON");
-  removeBtn.className = "remove-btn";
-  removeBtn.innerHTML = "Remove";
-  removeBtn.addEventListener("click", function () {
-    newRow.remove();
-
-    if (document.querySelector(".edit-" + currentEmployee.id)) {
-      document.querySelector(".edit-" + currentEmployee.id).remove();
-    }
-
-    employees.removeEmployee(currentEmployee);
-    renderEmployeesList();
-  });
-
-  let removeEmployeeCell = newRow.insertCell(newRow.cells.length);
-  removeEmployeeCell.appendChild(removeBtn);
-}
-
+// edit button ui and functionality
 function addEditButton(newRow, currentEmployee) {
   let editBtn = null;
   let editRow = null;
@@ -107,6 +94,7 @@ function addEditButton(newRow, currentEmployee) {
       // entering else means there is an edit row open meaning the user clicked the 'save' button
       const inputs = editRow.querySelectorAll(".edit-input");
 
+      // make a new object and insert all the inputs given
       const updatedEmployee = {};
       inputs.forEach((input) => {
         updatedEmployee[input.name] = input.value;
@@ -124,4 +112,25 @@ function addEditButton(newRow, currentEmployee) {
 
   let editEmployeeCell = newRow.insertCell(newRow.cells.length);
   editEmployeeCell.appendChild(editBtn);
+}
+
+// remove button ui and functionality
+function addRemoveButton(newRow, currentEmployee) {
+  let removeBtn;
+  removeBtn = document.createElement("BUTTON");
+  removeBtn.className = "remove-btn";
+  removeBtn.innerHTML = "Remove";
+  removeBtn.addEventListener("click", function () {
+    newRow.remove();
+
+    if (document.querySelector(".edit-" + currentEmployee.id)) {
+      document.querySelector(".edit-" + currentEmployee.id).remove();
+    }
+
+    employees.removeEmployee(currentEmployee);
+    renderEmployeesList();
+  });
+
+  let removeEmployeeCell = newRow.insertCell(newRow.cells.length);
+  removeEmployeeCell.appendChild(removeBtn);
 }
