@@ -7,37 +7,51 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <table id="employeesTable">
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Age</th>
-        <th>Start Date</th>
-        <th>Department</th>
-        <th>Salary</th>
-      </tr>
-    </table>
-    <form id="form">
-      <label for="firstName">First name: </label>
-      <input type="text" id="firstName" name="firstName" required />
+    <div class="contaier">
+      <table id="employeesTable">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Start Date</th>
+          <th>Department</th>
+          <th>Salary</th>
+        </tr>
+      </table>
 
-      <label for="lastName">Last name: </label>
-      <input type="text" id="lastName" name="lastName" required />
+      <button class="open-button" onclick="toggleForm()">Add Employee</button>
+      <div class="form-popup" id="myForm">
+        <form id="form" class="form-container">
+          <label for="firstName">First name: </label>
+          <input type="text" id="firstName" name="firstName" required />
 
-      <label for="age">Age: </label>
-      <input type="number" id="age" name="ageName" required />
+          <label for="lastName">Last name: </label>
+          <input type="text" id="lastName" name="lastName" required />
 
-      <label for="startDate">Start Date: </label>
-      <input type="date" id="startDate" name="startDate" required />
+          <label for="age">Age: </label>
+          <input type="number" id="age" name="ageName" required />
 
-      <label for="department">Department: </label>
-      <input type="text" id="department" name="department" required />
+          <label for="startDate">Start Date: </label>
+          <input type="date" id="startDate" name="startDate" required />
 
-      <label for="salary">Salary: </label>
-      <input type="number" id="salary" name="salary" required />
+          <label for="department">Department: </label>
+          <input type="text" id="department" name="department" required />
 
-      <button id="submitBtn">Submit</button>
-    </form>
+          <label for="salary">Salary: </label>
+          <input type="number" id="salary" name="salary" required />
+
+          <button type="submit" class="btn" id="submitBtn">Submit</button>
+          </button>
+        </form>
+      </div>
+    </div>
     <script type="module" src="./controller.js"></script>
+    <script>
+      function toggleForm() {
+        document.getElementById("myForm").style.display === "block" ? 
+        document.getElementById("myForm").style.display = "none":
+        document.getElementById("myForm").style.display="block"
+      }
+    </script>
   </body>
 </html>

@@ -13,6 +13,7 @@ submitForm.addEventListener("submit", function (ev) {
   });
   employees.addEmployee(formData);
   renderEmployeesList();
+  submitForm.reset();
 });
 
 function renderEmployeesList() {
@@ -39,8 +40,6 @@ function renderEmployeesList() {
 
     for (let j = 1; j < Object.values(currentEmployee).length; j++) {
       const employeeValues = Object.values(currentEmployee);
-      const input = document.createElement("INPUT");
-
       newRow.insertCell().innerHTML = employeeValues[j];
     }
     addInteractButtons(newRow, currentEmployee);
@@ -48,6 +47,31 @@ function renderEmployeesList() {
 }
 
 function addInteractButtons(newRow, currentEmployee) {
+  addEditButton(newRow, currentEmployee);
+  addRemoveButton(newRow, currentEmployee);
+}
+
+function addRemoveButton(newRow, currentEmployee) {
+  let removeBtn;
+  removeBtn = document.createElement("BUTTON");
+  removeBtn.className = "remove-btn";
+  removeBtn.innerHTML = "Remove";
+  removeBtn.addEventListener("click", function () {
+    newRow.remove();
+
+    if (document.querySelector(".edit-" + currentEmployee.id)) {
+      document.querySelector(".edit-" + currentEmployee.id).remove();
+    }
+
+    employees.removeEmployee(currentEmployee);
+    renderEmployeesList();
+  });
+
+  let removeEmployeeCell = newRow.insertCell(newRow.cells.length);
+  removeEmployeeCell.appendChild(removeBtn);
+}
+
+function addEditButton(newRow, currentEmployee) {
   let editBtn = null;
   let editRow = null;
 
@@ -86,36 +110,18 @@ function addInteractButtons(newRow, currentEmployee) {
       const updatedEmployee = {};
       inputs.forEach((input) => {
         updatedEmployee[input.name] = input.value;
-        console.log(updatedEmployee);
       });
 
       employees.editEmployee(currentEmployee, updatedEmployee);
+
       editRow.remove();
       editRow = null;
+      editBtn.innerHTML = "Edit";
 
-      editBtn.innerHTML = "Edit"; // make the button back to 'edit' button so next time the user presses it it will open editRow again
-
-      //renderEmployeesList();
+      renderEmployeesList();
     }
   });
 
   let editEmployeeCell = newRow.insertCell(newRow.cells.length);
   editEmployeeCell.appendChild(editBtn);
-
-  let removeBtn;
-  removeBtn = document.createElement("BUTTON");
-  removeBtn.className = "remove-btn";
-  removeBtn.innerHTML = "Remove";
-  removeBtn.addEventListener("click", function () {
-    newRow.remove();
-    if (editRow) {
-      editRow.remove();
-    }
-
-    employees.removeEmployee(currentEmployee);
-    renderEmployeesList();
-  });
-
-  let removeEmployeeCell = newRow.insertCell(newRow.cells.length);
-  removeEmployeeCell.appendChild(removeBtn);
 }

@@ -40,14 +40,77 @@ input[type="date"] {
   font-size: 16px;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.open-button {
+  background-color: purple;
+  font-size: 1.5rem;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 280px;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+}
+
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: rgb(196, 219, 225);
+}
+
+.form-container .btn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
+}
+
 .edit-input {
   min-width: 70px;
   max-width: 100%;
   padding: 5px;
 }
 
-#submitBtn {
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#submitBtn,
+.edit-btn {
   background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.remove-btn {
+  background-color: rgb(167, 40, 40);
   color: white;
   padding: 10px 15px;
   border: none;
