@@ -10,8 +10,17 @@
     <div class="container">
       <div class="filter-container">   
 
-      <label for="department">Department: </label>
-      <input type="text" id="filterInput" name="department" required />
+      <label for="select-filter">Filter By:</label>
+      <select name="filters" id="selectFilter">
+        <option value="all">All</option>
+        <option value="firstName">First name</option>
+        <option value="lastName">Last name</option>
+        <option value="age">Age</option>
+        <option value="startDate">Start date</option>
+        <option value="department">Department</option>
+        <option value="salary">Salary</option>
+      </select>
+      <input type="text" id="filterInput" required/>
       <button type="submit" class="btn" id="filterBtn">Filter</button>
 
       </div>
@@ -36,7 +45,7 @@
           <input type="text" id="lastName" name="lastName" required />
 
           <label for="age">Age: </label>
-          <input type="number" id="age" name="ageName" required />
+          <input type="number" id="age" name="age" required />
 
           <label for="startDate">Start Date: </label>
           <input type="date" id="startDate" name="startDate" required />
@@ -59,11 +68,6 @@
         document.getElementById("myForm").style.display === "block" ? 
         document.getElementById("myForm").style.display = "none":
         document.getElementById("myForm").style.display="block"
-      }
-      function toggleFilterForm() {
-        document.getElementById("myFilterForm").style.display === "block" ? 
-        document.getElementById("myFilterForm").style.display = "none":
-        document.getElementById("myFilterForm").style.display="block"
       }
     </script>
   </body>

@@ -1,64 +1,76 @@
 import { employees } from "./employees.js";
 
+const gSubmitForm = document.getElementById("form");
 renderEmployeesList();
+addEventListeners();
 
-const filterInput = document.getElementById("filterInput");
-filterInput.addEventListener("input", function () {
-  renderEmployeesList(filterInput.value);
-});
+function addEventListeners() {
+  document
+    .querySelector("#selectFilter")
+    .addEventListener("change", function () {
+      const selectedFilterType = this.value;
+      const filterInput = document.getElementById("filterInput");
+      filterInput.setAttribute("placeholder", `Enter ${this.value}`);
+      filterInput.removeEventListener("input", function () {
+        renderEmployeesList(filterInput.value, selectedFilterType);
+      });
 
-const submitForm = document.getElementById("form");
-submitForm.addEventListener("submit", function (ev) {
-  ev.preventDefault();
-  const formData = {};
-  Array.from(ev.target.elements).forEach(function (element) {
-    if (element.name) {
-      formData[element.name] = element.value;
-    }
+      if (this.value === "all") {
+        filterInput.value = "";
+        renderEmployeesList("", "all");
+        return;
+      }
+
+      filterInput.addEventListener("input", function () {
+        renderEmployeesList(filterInput.value, selectedFilterType);
+      });
+    });
+
+  gSubmitForm.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    const formData = {};
+    Array.from(ev.target.elements).forEach(function (element) {
+      if (element.name) {
+        formData[element.name] = element.value;
+      }
+    });
+    employees.addEmployee(formData);
+    renderEmployeesList();
+    gSubmitForm.reset();
   });
-  employees.addEmployee(formData);
-  renderEmployeesList();
-  submitForm.reset();
-});
+}
 
-function renderEmployeesList(filter = "") {
+function renderEmployeesList(filterInput = "", filterType = "all") {
   const elEmployeesTable = document.getElementById("employeesTable");
   const employeesList = employees.getEmployees();
-  let count = 0;
+
+  // clear table except header
   while (elEmployeesTable.rows.length > 1) {
-    // if its an edit row don't delete it
-    if (document.querySelector("edit-" + employeesList[count].id)) {
-      continue;
-    }
     elEmployeesTable.deleteRow(1);
-    count++;
   }
 
-  // loop our employee list
   for (let i = 0; i < employeesList.length; i++) {
     const currentEmployee = employeesList[i];
+    console.log(currentEmployee);
 
-    // if this row already exists continue or if filter doesn't align continue
+    // if no filter was selected / filter was selected and employee passes the test render it
     if (
-      document.querySelector("#row-" + currentEmployee.id) ||
-      !currentEmployee.department.toLowerCase().includes(filter.toLowerCase())
+      filterType === "all" ||
+      currentEmployee[filterType]
+        .toLowerCase()
+        .includes(filterInput.toLowerCase())
     ) {
-      continue;
+      let newRow = elEmployeesTable.insertRow();
+      newRow.setAttribute("id", "row-" + currentEmployee.id);
+
+      const employeeValues = Object.values(currentEmployee);
+
+      for (let j = 1; j < employeeValues.length; j++) {
+        newRow.insertCell().innerHTML = employeeValues[j];
+      }
+
+      addInteractButtons(newRow, currentEmployee);
     }
-
-    // insert new row into the table after the header row
-    let totalRowIndex = elEmployeesTable.rows.length;
-    let newRow = elEmployeesTable.insertRow(totalRowIndex);
-    newRow.setAttribute("id", "row-" + employeesList[i].id);
-
-    const employeeValues = Object.values(currentEmployee);
-
-    // iterate each value in the current employee object and insert cell for each value
-    for (let j = 1; j < employeeValues.length; j++) {
-      newRow.insertCell().innerHTML = employeeValues[j];
-    }
-
-    addInteractButtons(newRow, currentEmployee);
   }
 }
 
@@ -87,10 +99,10 @@ function addEditButton(newRow, currentEmployee) {
       const employeeValues = Object.values(currentEmployee);
 
       // get all elements except the submit button
-      for (let i = 0; i < submitForm.elements.length - 1; i++) {
+      for (let i = 0; i < gSubmitForm.elements.length - 1; i++) {
         const input = document.createElement("INPUT");
-        input.setAttribute("type", submitForm.elements[i].type || "text");
-        input.setAttribute("name", submitForm.elements[i].name);
+        input.setAttribute("type", gSubmitForm.elements[i].type || "text");
+        input.setAttribute("name", gSubmitForm.elements[i].name);
         input.value = employeeValues[i + 1];
 
         input.classList.add("edit-input");
