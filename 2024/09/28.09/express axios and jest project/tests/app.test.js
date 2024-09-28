@@ -15,17 +15,17 @@ describe("GET /products", () => {
 });
 
 it("should fetch a product by id", async () => {
-  const productId = 4643; // Test with a known valid product ID
+  const productId = 4643;
   const response = await request(app).get(`/products/${productId}`);
 
-  expect(response.status).toBe(200); // Check that status is 200 OK
-  expect(response.body.message).toBe("Successfully fetched product data"); // Check message
-  expect(response.body.data).toBeDefined(); // Check that there is data returned
-  expect(response.body.data.id).toBe(productId); // Check that the product ID matches
+  expect(response.status).toBe(200);
+  expect(response.body.message).toBe("Successfully fetched product data");
+  expect(response.body.data).toBeDefined();
+  expect(response.body.data.id).toBe(productId);
 });
 
 it("should return 500 for server error", async () => {
-  const productId = "invalid-id"; // A product ID that does not exist
+  const productId = "invalid-id";
   const response = await request(app).get(`/products/${productId}`);
 
   expect(response.status).toBe(500);
@@ -33,7 +33,7 @@ it("should return 500 for server error", async () => {
 });
 
 it("should return 404 for invalid product id", async () => {
-  const productId = 231243; // A product ID that does not exist
+  const productId = 231243;
   const response = await request(app).get(`/products/${productId}`);
 
   expect(response.status).toBe(404);
@@ -42,12 +42,12 @@ it("should return 404 for invalid product id", async () => {
 
 describe("POST /carts", () => {
   it("should create a new cart and return the cart ID", async () => {
-    const response = await request(app).post("/carts").send({}); // Sending an empty body
+    const response = await request(app).post("/carts").send({});
 
-    expect(response.status).toBe(201); // Expect a 201 status code
-    expect(response.body).toBeDefined(); // Ensure the response body is defined
-    expect(response.body.created).toBe(true); // Check if the cart was created
-    expect(response.body.cartId).toBeDefined(); // Check if cartId is returned
+    expect(response.status).toBe(201);
+    expect(response.body).toBeDefined();
+    expect(response.body.created).toBe(true);
+    expect(response.body.cartId).toBeDefined();
   });
 });
 

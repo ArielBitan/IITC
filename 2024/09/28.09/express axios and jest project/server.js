@@ -40,7 +40,6 @@ app.get("/products/:id", async (req, res) => {
       `https://simple-grocery-store-api.glitch.me/products/${productId}`
     );
 
-    // Send the product data back to the client
     res.json({
       message: "Successfully fetched product data",
       data: response.data,
@@ -121,24 +120,21 @@ app.get("/carts/:cartId", async (req, res) => {
 });
 
 app.post("/carts/:cartId/items", async (req, res) => {
-  const { cartId } = req.params; // Get the cartId from the URL
-  const { productId, quantity = 1 } = req.body; // Get productId and quantity from the request body, default quantity to 1
+  const { cartId } = req.params;
+  const { productId, quantity = 1 } = req.body;
 
-  // Check if the cartId exists in memory (for this example, we're assuming `carts` is the in-memory array)
   if (!carts.includes(cartId)) {
     return res.status(404).json({
       error: `No cart found with id ${cartId}`,
     });
   }
 
-  // Validate that productId is provided
   if (!productId) {
     return res.status(400).json({
       error: "Missing required parameter: productId",
     });
   }
 
-  // Add the item to the cart
   try {
     const response = await axios.post(
       `https://simple-grocery-store-api.glitch.me/carts/${cartId}/items`,
@@ -148,7 +144,6 @@ app.post("/carts/:cartId/items", async (req, res) => {
       }
     );
 
-    // If successful, return a 201 Created response
     res.status(201).json({
       message: "Item successfully added to the cart",
       cartId: cartId,
@@ -170,7 +165,6 @@ app.post("/carts/:cartId/items", async (req, res) => {
   }
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
