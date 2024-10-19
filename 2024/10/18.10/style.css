@@ -13,6 +13,17 @@ body {
   gap: 1rem;
 }
 
+.item {
+  display: flex;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.vote-average-section {
+  display: flex;
+  align-items: center;
+}
+
 ol {
   list-style: none;
   counter-reset: list-counter;
@@ -21,22 +32,21 @@ ol {
 li {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  border: 1px solid black;
-  padding: 10px;
+  margin-bottom: 8px;
+  font-weight: bold;
   counter-increment: list-counter;
 }
 
 li::before {
   content: counter(list-counter) ". ";
-  margin-right: 10px;
-  font-weight: bold;
+  margin-right: 8px;
 }
 
-#apiData img {
+.item img {
   order: -1;
-  margin-right: 10px; /* Add space between the image and the details */
+  margin-right: 10px;
   width: 55px;
+  border-radius: 0.3rem;
 }
 
 .movie-details {
@@ -44,11 +54,11 @@ li::before {
   flex-direction: column;
 }
 
-.title-container {
-  display: flex; /* Align the title and counter horizontally */
-  align-items: center;
+.movie-details div {
+  margin-bottom: 5px;
 }
 
-.movie-details div {
-  margin-bottom: 5px; /* Add some space between title and year */
+.vote-average-section img {
+  width: 2rem;
+  margin: 0;
 }

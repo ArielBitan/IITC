@@ -9,42 +9,46 @@ fetch(
 
     // Display each movie in the list
     data.results.forEach((movie) => {
-      const li = document.createElement("li");
+      const item = document.createElement("div");
+      item.className = "item";
 
-      // Create the image element
       const img = document.createElement("img");
       img.src = `${imageBaseUrl}${movie.poster_path}`;
-      img.alt = "image";
+      img.alt = "preview-image";
 
-      // Create a section to hold the movie details
       const movieDetailsSection = document.createElement("div");
       movieDetailsSection.classList.add("movie-details");
 
-      // Create a container for the title and counter
       const titleContainer = document.createElement("div");
       titleContainer.classList.add("title-container");
 
-      // Create the movie title element
-      const movieTitle = document.createElement("span");
+      const movieTitle = document.createElement("li");
       movieTitle.textContent = movie.title;
 
-      // Create the release year element
       const movieYear = document.createElement("div");
-      movieYear.textContent = movie.release_date;
+      movieYear.textContent = movie.release_date.slice(0, 4);
 
-      // Append the movie title to the title container
+      const voteAvgSection = document.createElement("div");
+      voteAvgSection.className = "vote-average-section";
+
+      const voteStarIcon = document.createElement("img");
+      const voteAvg = document.createElement("span");
+
+      voteStarIcon.src = "./star_icon.png";
+      voteAvg.textContent = movie.vote_average.toFixed(1);
+
+      voteAvgSection.appendChild(voteStarIcon);
+      voteAvgSection.appendChild(voteAvg);
       titleContainer.appendChild(movieTitle);
 
-      // Append title and year to movie details section
       movieDetailsSection.appendChild(titleContainer);
       movieDetailsSection.appendChild(movieYear);
+      movieDetailsSection.appendChild(voteAvgSection);
 
-      // Append the image and the details section to the list item
-      li.appendChild(img);
-      li.appendChild(movieDetailsSection);
+      item.appendChild(img);
+      item.appendChild(movieDetailsSection);
 
-      // Append the list item to the ordered list
-      ol.appendChild(li);
+      ol.appendChild(item);
     });
   })
   .catch((error) => {
