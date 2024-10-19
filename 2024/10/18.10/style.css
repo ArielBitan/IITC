@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 1rem;
+}
+
+#apiData {
+  display: grid;
+  grid-auto-rows: auto;
+  gap: 1rem;
+}
+
+ol {
+  list-style: none;
+  counter-reset: list-counter;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  counter-increment: list-counter;
+}
+
+li::before {
+  content: counter(list-counter) ". ";
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+#apiData img {
+  order: -1;
+  margin-right: 10px; /* Add space between the image and the details */
+  width: 55px;
+}
+
+.movie-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-container {
+  display: flex; /* Align the title and counter horizontally */
+  align-items: center;
+}
+
+.movie-details div {
+  margin-bottom: 5px; /* Add some space between title and year */
+}
