@@ -9,9 +9,31 @@
   <body>
     <div class="container">
       <h1 class="title">Movies Website</h1>
-      <div class="sort">Sort By</div>
-      <ol id="apiData"></ol>
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search for a movie..."
+        />
+        <button id="search-button">Search</button>
+      </div>
+      <div class="navigation">
+        <nav>
+          <a class="home" href="./index.html">Home</a>
+          <a class="about" href="./about.html">About </a>
+          <a class="favorites" href="./favorites.html">Favorites</a>
+        </nav>
+      </div>
     </div>
+    <div class="select-container">
+      <select name="sort" id="sort" class="styled-select">
+        <option value="popular">Popular</option>
+        <option value="popular-week">Popular of the week</option>
+        <option value="popular-day">Popular of the day</option>
+      </select>
+    </div>
+
+    <ol id="apiData"></ol>
     <script src="./script.js"></script>
   </body>
 </html>
