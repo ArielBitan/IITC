@@ -136,7 +136,7 @@ button:hover {
 
 #apiData {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(5, minmax(200px, 1fr));
   gap: 1rem;
   padding: 1rem;
 }
@@ -350,4 +350,10 @@ nav a:hover {
 #currentPage::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+@media (max-width: 1200px) {
+  #apiData {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
 }

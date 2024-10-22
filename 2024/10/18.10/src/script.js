@@ -35,10 +35,10 @@ function addNavigationListeners() {
 }
 
 // Adds 1/-1 to the current page and ensures the page number doesn't go below 1
-function navigatePage(direction) {
+async function navigatePage(direction) {
+  await renderFromApi(currentApi);
   currentPage = Math.max(1, currentPage + direction);
   currentPageInput.value = currentPage;
-  renderFromApi(currentApi);
 }
 
 // Add event listeners for search bar when user presses the search button or presses 'enter'
@@ -86,8 +86,8 @@ function addPageInputListener() {
     if (e.key === "Enter") {
       const pageNumber = parseInt(currentPageInput.value);
       if (!isNaN(pageNumber) && pageNumber > 0) {
-        currentPage = pageNumber;
         renderFromApi(currentApi);
+        currentPage = pageNumber;
       } else {
         alert("Please enter a valid page number.");
       }
