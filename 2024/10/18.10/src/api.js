@@ -1,10 +1,17 @@
 const API_KEY = "b3605e82f6566cec259bac46e84f0579";
+const API_BASE_URL = "https://api.themoviedb.org/3";
+
+const ENDPOINTS = {
+  POPULAR: `${API_BASE_URL}/movie/popular?api_key=${API_KEY}`,
+  TRENDING_WEEK: `${API_BASE_URL}/trending/movie/week?api_key=${API_KEY}`,
+  TRENDING_DAY: `${API_BASE_URL}/trending/movie/day?api_key=${API_KEY}`,
+};
 
 // fetchMovieDetails now contains an async function that takes the movieId and fetches the data about the movie
 const fetchMovieDetails = async (movieId) => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
+      `${API_BASE_URL}/movie/${movieId}?api_key=${API_KEY}`
     );
     if (!response.ok) throw new Error("Network response was not ok");
     return await response.json();
@@ -17,7 +24,7 @@ const fetchMovieDetails = async (movieId) => {
 const fetchMovieCredits = async (movieId) => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`
+      `${API_BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`
     );
     if (!response.ok) throw new Error("Network response was not ok");
     return await response.json();
@@ -26,4 +33,10 @@ const fetchMovieCredits = async (movieId) => {
   }
 };
 
-export { fetchMovieDetails, fetchMovieCredits };
+export {
+  fetchMovieDetails,
+  fetchMovieCredits,
+  ENDPOINTS,
+  API_BASE_URL,
+  API_KEY,
+};
