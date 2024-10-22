@@ -6,53 +6,96 @@ import {
   toggleFavorite,
 } from "./favorites.js";
 
+let currentPage = 1;
 const select = document.getElementById("sort");
 const ol = document.getElementById("apiData");
-
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
+const currentPageInput = document.getElementById("currentPage");
+const previousPageButton = document.getElementById("previousPage");
+const nextPageButton = document.getElementById("nextPage");
+
+let currentApi = `${API_BASE_URL}/movie/popular?api_key=${API_KEY}`;
 
 if (!isFavoritesPage()) {
   addEventListeners();
 }
 
-// Add search bar event listener and sorting event listener
 function addEventListeners() {
+  addNavigationListeners();
+  addSearchListeners();
+  addSortingListeners();
+  addPageInputListener();
+}
+
+// Adds event listeners for pressing the 'nextPage' button and 'previousPage' button
+function addNavigationListeners() {
+  previousPageButton.addEventListener("click", () => navigatePage(-1));
+  nextPageButton.addEventListener("click", () => navigatePage(1));
+}
+
+// Adds 1/-1 to the current page and ensures the page number doesn't go below 1
+function navigatePage(direction) {
+  currentPage = Math.max(1, currentPage + direction);
+  currentPageInput.value = currentPage;
+  renderFromApi(currentApi);
+}
+
+// Add event listeners for search bar when user presses the search button or presses 'enter'
+function addSearchListeners() {
   searchInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       searchButton.click();
     }
   });
+
   searchButton.addEventListener("click", () => {
     const query = searchInput.value.trim();
-    if (query) {
-      renderFromApi(
-        `${API_BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+    currentPage = 1;
+    currentApi = query
+      ? `${API_BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
           query
         )}`
-      );
-    } else if (query === "") {
-      console.log("s");
+      : ENDPOINTS.POPULAR; // Perform the search based on current sorting value from select
 
-      renderFromApi(ENDPOINTS.POPULAR);
-    }
+    renderFromApi(currentApi);
   });
+}
+
+// Add event listener for changing the select item and sort based on selected value
+function addSortingListeners() {
   select.addEventListener("change", (e) => {
     ol.textContent = "";
     const selectedValue = e.target.value;
 
-    const apiToCall =
+    currentApi =
       {
         "popular-week": ENDPOINTS.TRENDING_WEEK,
         "popular-day": ENDPOINTS.TRENDING_DAY,
         popular: ENDPOINTS.POPULAR,
       }[selectedValue] || ENDPOINTS.POPULAR;
 
-    renderFromApi(apiToCall);
+    currentPage = 1;
+    renderFromApi(currentApi);
   });
 }
 
-// Create movie item element and append to movies list
+// Add event listener for current page input
+function addPageInputListener() {
+  currentPageInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const pageNumber = parseInt(currentPageInput.value);
+      if (!isNaN(pageNumber) && pageNumber > 0) {
+        currentPage = pageNumber;
+        renderFromApi(currentApi);
+      } else {
+        alert("Please enter a valid page number.");
+      }
+    }
+  });
+}
+
+// Create the whole movie 'card' with poster image and details section
 function createItemElement(movie) {
   const item = document.createElement("div");
   item.className = "item";
@@ -63,13 +106,21 @@ function createItemElement(movie) {
   );
   item.appendChild(imgContainer);
 
+  const movieDetailsSection = createMovieDetailsSection(movie);
+  item.appendChild(movieDetailsSection);
+
+  ol.appendChild(item);
+}
+
+// Create the details section with title,vote avg and year
+function createMovieDetailsSection(movie) {
   const movieDetailsSection = document.createElement("div");
   movieDetailsSection.classList.add("movie-details");
 
   const titleContainer = document.createElement("div");
   titleContainer.classList.add("title-container");
-
   titleContainer.appendChild(createMovieTitleLink(movie));
+
   const movieYear = document.createElement("div");
   movieYear.textContent = movie.release_date.slice(0, 4);
 
@@ -77,11 +128,10 @@ function createItemElement(movie) {
   movieDetailsSection.appendChild(movieYear);
   movieDetailsSection.appendChild(createVoteAvgSection(movie.vote_average));
 
-  item.appendChild(movieDetailsSection);
-  ol.appendChild(item);
+  return movieDetailsSection;
 }
 
-// Create image element
+// Create the poster image and add the 'favorite' icon on top left
 function createImageElement(src, movieId) {
   const imgContainer = document.createElement("div");
   imgContainer.className = "img-container";
@@ -90,25 +140,30 @@ function createImageElement(src, movieId) {
   posterImg.src = src;
   posterImg.alt = "preview-image";
 
-  const addToFavoritesImg = document.createElement("img");
-  addToFavoritesImg.src = isFavorite(movieId)
-    ? "./photos/Sprite-0002.png"
-    : "./photos/Sprite-0001.png";
-  addToFavoritesImg.alt = "favorites-img";
-  addToFavoritesImg.className = "favorite-img";
-
-  // Add click event to toggle favorite
-  addToFavoritesImg.addEventListener("click", () => {
-    toggleFavorite(movieId, addToFavoritesImg);
-  });
-
+  const addToFavoritesImg = createFavoritesImage(movieId);
   imgContainer.appendChild(posterImg);
   imgContainer.appendChild(addToFavoritesImg);
 
   return imgContainer;
 }
 
-// Create movie title link
+// Create 'favorite' icon and check if movie is in favorites
+function createFavoritesImage(movieId) {
+  const img = document.createElement("img");
+  img.src = isFavorite(movieId)
+    ? "./photos/Sprite-0002.png"
+    : "./photos/Sprite-0001.png";
+  img.alt = "favorites-img";
+  img.className = "favorite-img";
+
+  img.addEventListener("click", () => {
+    toggleFavorite(movieId, img);
+  });
+
+  return img;
+}
+
+// Create movie title and make it a link to movie details
 function createMovieTitleLink(movie) {
   const movieTitleLink = document.createElement("a");
   movieTitleLink.href = `movie-details.html?id=${movie.id}`;
@@ -116,7 +171,7 @@ function createMovieTitleLink(movie) {
   return movieTitleLink;
 }
 
-// Create vote average section
+// Create the vote average section with number and star icon
 function createVoteAvgSection(voteAverage) {
   const voteAvgSection = document.createElement("div");
   voteAvgSection.className = "vote-average-section";
@@ -133,38 +188,33 @@ function createVoteAvgSection(voteAverage) {
   return voteAvgSection;
 }
 
-// Fetch and render movies from API
-function renderFromApi(api) {
-  fetch(api)
-    .then((response) => response.json())
-    .then((data) => {
-      ol.innerHTML = "";
+// This function gets an api as a parameter and creates elements on the page based on it
+async function renderFromApi(api) {
+  api += `&page=${currentPage}`;
+  try {
+    const response = await fetch(api);
+    const data = await response.json();
+    ol.innerHTML = "";
 
-      // If we are not on the favorites page render all movies
-      if (!isFavoritesPage()) {
-        data.results.forEach((movie) => {
-          createItemElement(movie);
-        });
-      } else {
-        // If on the favorites page render favorites instead
-        renderFavorites();
-      }
+    if (!isFavoritesPage()) {
+      data.results.forEach(createItemElement);
+    } else {
+      renderFavorites();
+    }
 
-      // If there are no movies to show print a message
-      if (ol.innerHTML === "") {
-        ol.innerHTML = "<p>No movies to show</p>";
-      }
-    })
-    .catch((error) => {
-      console.error("Error loading movies:", error);
-      ol.innerHTML = "<p>Failed to load movies</p>";
-    });
+    if (ol.innerHTML === "") {
+      ol.innerHTML = "<p>No movies to show</p>";
+    }
+  } catch (error) {
+    console.error("Error loading movies:", error);
+    ol.innerHTML = "<p>Failed to load movies</p>";
+  }
 }
 
 if (isFavoritesPage()) {
   renderFavorites();
 } else {
-  renderFromApi(ENDPOINTS.POPULAR); // default
+  renderFromApi(currentApi);
 }
 
 export { createItemElement };

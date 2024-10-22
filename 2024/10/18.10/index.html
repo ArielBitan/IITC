@@ -20,8 +20,8 @@
       <div class="navigation">
         <nav>
           <a class="home" href="./index.html">Home</a>
-          <a class="about" href="./about.html">About </a>
           <a class="favorites" href="./favorites.html">Favorites</a>
+          <a class="about" href="./about.html">About </a>
         </nav>
       </div>
     </div>
@@ -34,6 +34,12 @@
     </div>
 
     <ol id="apiData"></ol>
+    <div class="swap-pages">
+      <span id="previousPage">Previous</span>
+      <input type="number" id="currentPage" value="1" min="1" />
+      <span id="nextPage">Next</span>
+    </div>
+
     <script type="module" src="src/script.js"></script>
   </body>
 </html>

@@ -14,7 +14,7 @@ const elements = {
 };
 
 /*
-call fetchMovieDetails from api.js then take the movie details (response.json) change all dom elements and pass the data from 
+Call fetchMovieDetails from api.js then take the movie details (response.json) change all dom elements and pass the data from 
 credits api , the next then. takes this data and creates a list of actors and their characters with this data 
 */
 fetchMovieDetails(movieId)
@@ -27,7 +27,7 @@ fetchMovieDetails(movieId)
     console.error("Error fetching movie details or credits:", error)
   );
 
-// populate movie details
+// Populate movie details
 const populateMovieDetails = (movie) => {
   elements.movieTitle.textContent = movie.title;
   elements.moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
@@ -39,7 +39,7 @@ const populateMovieDetails = (movie) => {
     .join(", ")}`;
 };
 
-// populate cast list with actor names and their characters
+// Populate cast list with actor names and their characters
 const populateCastList = (cast) => {
   const topActors = cast.slice(0, 10);
   topActors.forEach((actor) => {

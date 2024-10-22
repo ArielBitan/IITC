@@ -104,13 +104,6 @@ img {
   margin: 0 auto;
 }
 
-p {
-  font-size: 1.2rem;
-  color: #666;
-  line-height: 1.8;
-  margin-bottom: 1rem;
-}
-
 #cast-list {
   list-style: none;
   padding: 0;
@@ -260,6 +253,7 @@ a:hover {
 .about-content ul li {
   margin-bottom: 0.8rem;
   font-size: 1.1rem;
+  color: #666;
 }
 
 header h1 {
@@ -317,4 +311,43 @@ nav a:hover {
   font-size: 1.5rem;
   color: #666;
   margin-top: 2rem;
+}
+
+.swap-pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.swap-pages span {
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  color: #007bff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.swap-pages span:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+#currentPage {
+  width: 50px;
+  text-align: center;
+  margin: 0 5px;
+  padding: 5px;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  color: #333;
+}
+
+#currentPage::-webkit-inner-spin-button,
+#currentPage::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

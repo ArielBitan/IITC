@@ -53,15 +53,17 @@ function renderFavorites() {
   if (favorites.length === 0) {
     ol.innerHTML = "<p>No movies to show</p>";
   } else {
-    favorites.forEach((movieId) => {
-      fetch(`${API_BASE_URL}/movie/${movieId}?api_key=${API_KEY}`)
-        .then((response) => response.json())
-        .then((movie) => {
-          createItemElement(movie);
-        })
-        .catch((error) => {
-          console.error("Error loading movie:", error);
-        });
+    favorites.forEach(async (movieId) => {
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/movie/${movieId}?api_key=${API_KEY}`
+        );
+        const movie = await response.json();
+        createItemElement(movie);
+      } catch (error) {
+        console.error("Error loading movies:", error);
+        ol.innerHTML = "<p>Failed to load favorites</p>";
+      }
     });
   }
 }
