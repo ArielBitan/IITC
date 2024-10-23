@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="top-section">
+        <h1>Mortgage Calculator</h1>
+        <div class="clear-all">Clear All</div>
+        <div class="inputs">
+          <div class="input-element">
+            <h2>Mortgage Amount</h2>
+            <div class="input-block">
+              <span>£</span><input type="number" class="styled-input" />
+            </div>
+          </div>
+          <div class="input-element">
+            <h2>Mortgage Term</h2>
+            <div class="input-block">
+              <input type="number" class="styled-input" /><span>years</span>
+            </div>
+          </div>
+          <div class="input-element">
+            <h2>Interest Rate</h2>
+            <div class="input-block">
+              <input type="number" class="styled-input" /><span>%</span>
+            </div>
+          </div>
+        </div>
+        <div class="mortgage-type">
+          <h2>Mortgage Type</h2>
+          <div class="radio-group">
+            <label class="radio-container">
+              <input type="radio" name="option" checked />
+              <span class="custom-radio"></span>
+              Repayment
+            </label>
+
+            <label class="radio-container">
+              <input type="radio" name="option" />
+              <span class="custom-radio"></span>
+              Interest Only
+            </label>
+          </div>
+        </div>
+        <div class="calculate-section">
+          <img
+            src="/2024/10/23.10/mortgage-repayment-calculator-main/mortgage-repayment-calculator-main/assets/images/icon-calculator.svg"
+            alt="img"
+          />
+          <div>Calculate Repayments</div>
+        </div>
+      </div>
+      <div class="bottom-section">
+        <div class="img-container">
+          <img
+            src="/2024/10/23.10/mortgage-repayment-calculator-main/mortgage-repayment-calculator-main/assets/images/illustration-empty.svg"
+            alt="empty-results"
+          />
+        </div>
+        <div class="empty-results">
+          Results shown here
+          <p>
+            Complete the form and click "calculate repayments" to see what your
+            monthly repayments would be.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
