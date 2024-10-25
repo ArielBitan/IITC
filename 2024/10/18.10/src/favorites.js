@@ -1,5 +1,7 @@
-import { API_BASE_URL, API_KEY } from "./api.js";
+import { API_BASE_URL } from "./api.js";
 import { createItemElement } from "./script.js";
+import { API_KEY } from "./env.js";
+
 const ol = document.getElementById("apiData");
 
 // Load favorites from local storage

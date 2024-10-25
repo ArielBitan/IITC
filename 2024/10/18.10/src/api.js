@@ -1,4 +1,4 @@
-const API_KEY = "b3605e82f6566cec259bac46e84f0579";
+import { API_KEY } from "./env.js";
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
 const ENDPOINTS = {
