@@ -8,69 +8,124 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="wrapper">
-      <div class="top-section">
-        <h1>Mortgage Calculator</h1>
-        <div class="clear-all">Clear All</div>
-        <div class="inputs">
-          <div class="input-element">
-            <h2>Mortgage Amount</h2>
-            <div class="input-block">
-              <span>£</span><input type="number" class="styled-input" />
+    <div class="desktop-container">
+      <div class="wrapper">
+        <div class="top-section">
+          <h1>Mortgage Calculator</h1>
+          <div class="clear-all">Clear All</div>
+          <form id="mortgageForm">
+            <div class="inputs">
+              <div class="input-element">
+                <h2>Mortgage Amount</h2>
+                <div class="input-block">
+                  <span>£</span
+                  ><input
+                    type="text"
+                    class="styled-input"
+                    name="mortgageAmount"
+                    id="mortgageAmount"
+                    maxlength="15"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="input-element">
+                <h2>Mortgage Term</h2>
+                <div class="input-block">
+                  <input
+                    type="number"
+                    class="styled-input"
+                    name="mortgageTerm"
+                    required
+                  /><span>years</span>
+                </div>
+              </div>
+              <div class="input-element">
+                <h2>Interest Rate</h2>
+                <div class="input-block">
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    class="styled-input"
+                    name="interestRate"
+                    required="required"
+                  /><span>%</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="input-element">
-            <h2>Mortgage Term</h2>
-            <div class="input-block">
-              <input type="number" class="styled-input" /><span>years</span>
+            <div class="mortgage-type">
+              <h2>Mortgage Type</h2>
+              <div class="radio-group">
+                <label class="radio-container">
+                  <input
+                    type="radio"
+                    name="mortgageType"
+                    value="repayment"
+                    required
+                  />
+                  <span class="custom-radio"></span>
+                  Repayment
+                </label>
+                <label class="radio-container">
+                  <input
+                    type="radio"
+                    name="mortgageType"
+                    value="interestOnly"
+                    required
+                  />
+                  <span class="custom-radio"></span>
+                  Interest Only
+                </label>
+              </div>
             </div>
+            <button class="calculate-section" type="submit">
+              <img
+                src="/2024/10/23.10/mortgage-repayment-calculator-main/mortgage-repayment-calculator-main/assets/images/icon-calculator.svg"
+                alt="img"
+              />
+              Calculate Repayments
+            </button>
+          </form>
+        </div>
+        <div class="bottom-section" id="bottomSection">
+          <div class="empty-results">
+            <div class="img-container">
+              <img
+                src="/2024/10/23.10/mortgage-repayment-calculator-main/mortgage-repayment-calculator-main/assets/images/illustration-empty.svg"
+                alt="empty-results"
+              />
+            </div>
+            <div class="results-title">Results shown here</div>
+            <p>
+              Complete the form and click "calculate repayments" to see what your
+              monthly repayments would be.
+            </p>
           </div>
-          <div class="input-element">
-            <h2>Interest Rate</h2>
-            <div class="input-block">
-              <input type="number" class="styled-input" /><span>%</span>
+          <div class="results hide-element">
+            <div class="results-title">Your results</div>
+            <p>
+              Your results are shown below based on the information you provided.
+              To adjust the results, edit the form and click "calculate
+              repayments" again.
+            </p>
+            <div class="output-section">
+              <div class="monthly-repayments">
+                <p>Your monthly repayments</p>
+                <div id="monthlyRepayments">0000</div>
+              </div>
+              <hr />
+              <div class="total">
+                <p>Total you'll repay over the term</p>
+                <div id="total">00000</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="mortgage-type">
-          <h2>Mortgage Type</h2>
-          <div class="radio-group">
-            <label class="radio-container">
-              <input type="radio" name="option" checked />
-              <span class="custom-radio"></span>
-              Repayment
-            </label>
-
-            <label class="radio-container">
-              <input type="radio" name="option" />
-              <span class="custom-radio"></span>
-              Interest Only
-            </label>
-          </div>
-        </div>
-        <div class="calculate-section">
-          <img
-            src="/2024/10/23.10/mortgage-repayment-calculator-main/mortgage-repayment-calculator-main/assets/images/icon-calculator.svg"
-            alt="img"
-          />
-          <div>Calculate Repayments</div>
-        </div>
+        <div class="overlap"></div>
       </div>
-      <div class="bottom-section">
-        <div class="img-container">
-          <img
-            src="/2024/10/23.10/mortgage-repayment-calculator-main/mortgage-repayment-calculator-main/assets/images/illustration-empty.svg"
-            alt="empty-results"
-          />
         </div>
-        <div class="empty-results">
-          Results shown here
-          <p>
-            Complete the form and click "calculate repayments" to see what your
-            monthly repayments would be.
-          </p>
-        </div>
-      </div>
-    </div>
+    </desktop-container>
+    <script src="./script.js"></script>
   </body>
 </html>
