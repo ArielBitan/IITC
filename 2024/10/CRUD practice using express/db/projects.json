@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Project A",
+    "description": "Complete the initial design and wiredraws",
+    "deadline": "2024-12-01"
+  },
+  {
+    "id": 3,
+    "name": "Project C",
+    "description": "Conduct user research and surveys",
+    "deadline": "2024-11-20"
+  },
+  {
+    "id": 4,
+    "name": "Project D",
+    "description": "Finalize project documentation and reports",
+    "deadline": "2025-02-05"
+  },
+  {
+    "id": 5,
+    "name": "Project E",
+    "description": "Deploy beta version to selected users",
+    "deadline": "2025-03-10"
+  },
+  {
+    "id": 6,
+    "name": "Project F",
+    "description": "Plan and execute marketing strategy",
+    "deadline": "2024-12-15"
+  },
+  {
+    "id": 7,
+    "name": "Project G",
+    "description": "Optimize code and fix performance issues",
+    "deadline": "2025-01-01"
+  },
+  {
+    "id": 8,
+    "name": "Project H",
+    "description": "Prepare and conduct training for new users",
+    "deadline": "2025-02-20"
+  },
+  {
+    "id": 9,
+    "name": "Project I",
+    "description": "Integrate third-party services and APIs",
+    "deadline": "2025-03-25"
+  },
+  {
+    "id": 10,
+    "name": "Project J",
+    "description": "Review feedback and make final adjustments",
+    "deadline": "2025-04-10"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "title": "Task 1",
+    "description": "Design the homepage layout",
+    "projectId": 1,
+    "status": "in-progress"
+  },
+  {
+    "id": 2,
+    "title": "Task 2",
+    "description": "Implement login functionality",
+    "projectId": 1,
+    "status": "completed"
+  },
+  {
+    "id": 3,
+    "title": "Task 3",
+    "description": "Create API endpoints for user data",
+    "projectId": 2,
+    "status": "in-progress"
+  },
+  {
+    "id": 4,
+    "title": "Task 4",
+    "description": "Conduct usability testing with selected users",
+    "projectId": 3,
+    "status": "pending"
+  },
+  {
+    "id": 5,
+    "title": "Task 5",
+    "description": "Generate monthly report for stakeholders",
+    "projectId": 4,
+    "status": "completed"
+  },
+  {
+    "id": 6,
+    "title": "Task 6",
+    "description": "Deploy staging version for QA team",
+    "projectId": 5,
+    "status": "in-progress"
+  },
+  {
+    "id": 7,
+    "title": "Task 7",
+    "description": "Prepare social media campaign content",
+    "projectId": 6,
+    "status": "pending"
+  },
+  {
+    "id": 8,
+    "title": "Task 8",
+    "description": "Optimize database queries",
+    "projectId": 7,
+    "status": "in-progress"
+  },
+  {
+    "id": 9,
+    "title": "Task 9",
+    "description": "Conduct team training session",
+    "projectId": 8,
+    "status": "pending"
+  },
+  {
+    "id": 10,
+    "title": "Task 10",
+    "description": "Integrate payment processing system",
+    "projectId": 9,
+    "status": "completed"
+  }
+]
