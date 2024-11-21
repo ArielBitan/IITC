@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Favorite Movies</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Your Favorite Movies</h1>
+      <main class="container">
+      <div class="navigation">
+        <nav>
+          <a class="home" href="./index.html">Home</a>
+          <a class="favorites" href="./favorites.html">Favorites</a>
+          <a class="about" href="./about.html">About </a>
+        </nav>
+      </div>
+    </header>
+    <div
+    id="no-movies-message"
+    class="no-movies-message"
+    style="display: none"
+    >
+    No favorite movies added yet!
+</div>
+</main>
+<ol id="apiData"></ol>
+
+    <script type="module" src="src/script.js"></script>
+  </body>
+</html>
