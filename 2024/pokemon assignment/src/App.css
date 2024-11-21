@@ -1,0 +1,15 @@
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+ul {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
