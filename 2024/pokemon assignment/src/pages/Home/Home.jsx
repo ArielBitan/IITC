@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <ul className={styles.grid}>
+      <ul class="p-2 rounded-md list-none grid gap-4 list-none grid-cols-5 p-4">
         {pokemonsData.map((pokemon) => (
           <Card
             key={pokemon.id}

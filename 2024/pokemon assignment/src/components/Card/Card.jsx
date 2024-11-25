@@ -2,9 +2,9 @@ import styles from "./Card.module.css";
 const Card = (props) => {
   return (
     <>
-      <li className={styles.cardElement}>
+      <li class="bg-gray-300 p-2 rounded-md">
         <h3>{props.name.charAt(0).toUpperCase() + props.name.slice(1)}</h3>
-        <div className={styles.cardOverview}>
+        <div class="flex items-center justify-evenly gap-2">
           {props.types.map((element, index) => (
             <span key={index} className={styles.type}>
               {element}
