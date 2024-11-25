@@ -1,16 +1,21 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { usePokemon } from "./Api.jsx"; // Import your loader
+import { fetchPokemons } from "./Api.jsx";
 import "./App.css";
 
 // Pages
-import Home from "./pages/Home/Home.jsx";
+import Home from "./pages/Home.jsx";
+import PokemonData from "./pages/PokemonData.jsx";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      loader: usePokemon, // The loader for this route
-      element: <Home />, // The component to render
+      loader: fetchPokemons,
+      element: <Home />,
+    },
+    {
+      path: "/:id",
+      element: <PokemonData />,
     },
   ]);
 

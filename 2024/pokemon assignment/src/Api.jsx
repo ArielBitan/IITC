@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// This loader function is now an async function that returns a promise
-export async function usePokemon() {
+export async function fetchPokemons() {
   try {
     const response = await axios.get("https://pokeapi.co/api/v2/pokemon");
     const pokemons = response.data.results;
@@ -16,6 +15,17 @@ export async function usePokemon() {
 
     // Return the fetched data
     return detailedPokemons;
+  } catch (error) {
+    throw new Error("Error fetching Pokemon data");
+  }
+}
+
+export async function fetchSinglePokemon(id) {
+  try {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const pokemon = response.data.results;
+
+    return pokemon;
   } catch (error) {
     throw new Error("Error fetching Pokemon data");
   }
