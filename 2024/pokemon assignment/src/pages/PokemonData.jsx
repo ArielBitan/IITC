@@ -1,39 +1,41 @@
 import { useParams } from "react-router-dom";
 import Navbar from "../components/navbar.jsx";
 import { fetchSinglePokemon } from "../Api";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const PokemonData = () => {
-  const { id } = useParams(); // Destructure id directly
-  const [pokemonData, setPokemonData] = useState(null);
+  const { id } = useParams();
+  const [pokemonData, setPokemonData] = useState(null); // State to store Pokémon data
+  const [error, setError] = useState(null); // State to handle errors
 
   useEffect(() => {
-    const getPokemonData = async () => {
+    const fetchPokemonData = async () => {
       try {
         const data = await fetchSinglePokemon(id);
-        setPokemonData(data); // Store the fetched data in state
-      } catch (error) {
-        console.error("Error fetching Pokémon data:", error);
+        setPokemonData(data);
+      } catch (err) {
+        console.error("Error fetching Pokémon data:", err);
+        setError(err.message);
       }
     };
 
-    getPokemonData();
-  }, [id]); // Dependency array ensures effect runs when `id` changes
+    fetchPokemonData();
+  }, []);
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  if (!pokemonData) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
       <Navbar />
-      <h1>Hello, {id}</h1>
-      {/* Optionally display fetched Pokémon data */}
-      {pokemonData ? (
-        <div>
-          <h2>{pokemonData.name}</h2>
-          <img src={pokemonData.sprite} alt={pokemonData.name} />
-          {/* Add other Pokémon details as needed */}
-        </div>
-      ) : (
-        <p>Loading Pokémon data...</p>
-      )}
+      <h1>{pokemonData.name}</h1>
+      <img src={pokemonData.sprites.front_default} alt={pokemonData.name} />
+      {/* Add other Pokémon details as needed */}
     </>
   );
 };

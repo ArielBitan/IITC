@@ -2,28 +2,39 @@ import axios from "axios";
 
 export async function fetchPokemons() {
   try {
-    const response = await axios.get("https://pokeapi.co/api/v2/pokemon");
+    const response = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon?limit=99"
+    );
     const pokemons = response.data.results;
 
-    // Fetch detailed pokemon data asynchronously
     const detailedPokemons = await Promise.all(
       pokemons.map(async (pokemon) => {
-        const pokemonData = await axios.get(pokemon.url);
-        return pokemonData.data;
+        const speciesData = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`
+        );
+
+        if (!speciesData.data.evolves_from_species) {
+          // Fetch Pokémon data for valid base Pokémon
+          const pokemonData = await axios.get(pokemon.url);
+          return pokemonData.data;
+        }
+        return null;
       })
     );
 
-    // Return the fetched data
-    return detailedPokemons;
+    const basePokemons = detailedPokemons.filter((pokemon) => pokemon !== null);
+
+    return basePokemons;
   } catch (error) {
-    throw new Error("Error fetching Pokemon data");
+    console.error("Error fetching Pokémon data:", error);
+    throw error;
   }
 }
 
 export async function fetchSinglePokemon(id) {
   try {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    const pokemon = response.data.results;
+    const pokemon = response.data;
 
     return pokemon;
   } catch (error) {
