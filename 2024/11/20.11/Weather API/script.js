@@ -33,9 +33,6 @@ async function getMainForecast(lat, lon) {
     cityNameElement.innerHTML = data.name;
     mainTempElement.innerHTML = `${data.main.temp.toFixed(0)}°`;
     tempDescElement.innerHTML = data.weather[0].description;
-    todaysTempElement.innerHTML = `${data.main.temp_min.toFixed(
-      0
-    )}°/${data.main.temp_max.toFixed(0)}°`;
   } catch (err) {
     console.error("Error fetching weather data:", err);
   }
