@@ -1,7 +1,0 @@
-.grid {
-  gap: 1rem 1rem;
-  list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(200px, 1fr));
-  padding: 1rem;
-}

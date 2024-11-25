@@ -1,7 +1,6 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import Card from "../../components/Card/Card.jsx";
-import styles from "./Home.module.css";
 import Navbar from "../../components/navbar.jsx";
 const Home = () => {
   // Access the loader data using useLoaderData
