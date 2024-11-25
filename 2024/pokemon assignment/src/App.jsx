@@ -1,5 +1,9 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { fetchPokemons } from "./Api.jsx";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  useParams,
+} from "react-router-dom";
+import { fetchPokemons, fetchPokemonsByType } from "./Api.jsx";
 import "./App.css";
 
 // Pages
@@ -16,6 +20,11 @@ function App() {
     {
       path: "/:id",
       element: <PokemonData />,
+    },
+    {
+      path: "/data/:type",
+      loader: ({ params }) => fetchPokemonsByType(params.type),
+      element: <Home />,
     },
   ]);
 
