@@ -26,6 +26,8 @@ router.get("/:id", getSubscriber, async (req, res) => {
 
 // add subscriber data
 router.post("/", async (req, res) => {
+  console.log(req.body);
+
   const subscriber = new Subscriber({
     name: req.body.name,
     subscriberToChannel: req.body.subscriberToChannel,

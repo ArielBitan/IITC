@@ -1,26 +1,32 @@
 import React from "react";
-import { usePokemon } from "../../Api";
-
+import { useLoaderData } from "react-router-dom";
+import Card from "../../components/Card/Card.jsx";
+import styles from "./Home.module.css";
+import Navbar from "../../components/navbar.jsx";
 const Home = () => {
-  const { pokemonsData, loading, error } = usePokemon();
+  // Access the loader data using useLoaderData
+  const pokemonsData = useLoaderData();
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error.message}</p>;
+  // Check for loading or error states (optional if needed)
+  if (!pokemonsData) {
+    return <p>Loading...</p>; // Or handle the loading state here
   }
 
   return (
-    <ul>
-      {pokemonsData.map((pokemon) => (
-        <li key={pokemon.id}>
-          <h3>{pokemon.name}</h3>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-        </li>
-      ))}
-    </ul>
+    <>
+      <Navbar />
+      <ul className={styles.grid}>
+        {pokemonsData.map((pokemon) => (
+          <Card
+            key={pokemon.id}
+            id={pokemon.id}
+            types={pokemon.types.map((type) => type.type.name)}
+            name={pokemon.name}
+            sprite={pokemon.sprites.front_default}
+          />
+        ))}
+      </ul>
+    </>
   );
 };
 
