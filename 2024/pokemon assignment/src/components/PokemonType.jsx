@@ -1,4 +1,4 @@
-const Type = (props) => {
+const PokemonType = (props) => {
   return (
     <>
       <span key={props.key} className={props.className} style={props.style}>
@@ -7,4 +7,4 @@ const Type = (props) => {
     </>
   );
 };
-export default Type;
+export default PokemonType;

@@ -31,7 +31,7 @@ export async function fetchPokemons() {
   }
 }
 
-export async function fetchPokemonsByType(type, limit = 80) {
+export async function fetchPokemonsByType(type, limit = 100) {
   try {
     const response = await axios.get(`https://pokeapi.co/api/v2/type/${type}`);
     const pokemons = response.data.pokemon.slice(0, limit);
@@ -40,7 +40,7 @@ export async function fetchPokemonsByType(type, limit = 80) {
     const detailedPokemons = await Promise.all(
       pokemons.map(async (pokemon) => {
         const speciesData = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon-species/${pokemon.pokemon.name}`
+          `https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon.name}`
         );
 
         if (!speciesData.data.evolves_from_species) {
