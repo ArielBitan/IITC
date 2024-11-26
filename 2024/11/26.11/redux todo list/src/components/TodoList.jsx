@@ -4,17 +4,17 @@ import {
   addTodo,
   toggleTodo,
   deleteTodo,
-} from "../store/actions/TodoActions.js";
+} from "../store/reducers/TodoSlice.js";
 
 function TodoList() {
   const [newTodo, setNewTodo] = useState("");
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos); // Access the todos from Redux store
+  const todos = useSelector((state) => state.todos);
 
   const handleAddTodo = () => {
     if (newTodo.trim() !== "") {
       dispatch(addTodo(newTodo));
-      setNewTodo(""); // Clear the input after adding
+      setNewTodo("");
     }
   };
 
