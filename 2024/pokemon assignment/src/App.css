@@ -12,3 +12,11 @@ html,
 body {
   height: 100%;
 }
+
+.container {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
