@@ -4,7 +4,7 @@ import YourCart from "./components/YourCart";
 
 function App() {
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
       <ItemsList />
       <YourCart />
     </div>

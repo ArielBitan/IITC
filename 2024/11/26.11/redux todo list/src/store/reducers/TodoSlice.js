@@ -15,11 +15,8 @@ export const todosSlice = createSlice({
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
     toggleTodo(state, action) {
-      state.todos = state.todos.map((todo) =>
-        todo.id === action.payload
-          ? { ...todo, completed: !todo.completed }
-          : todo
-      );
+      const todo = state.todos.find((todo) => todo.id === action.payload);
+      todo.completed = !todo.completed;
     },
   },
 });

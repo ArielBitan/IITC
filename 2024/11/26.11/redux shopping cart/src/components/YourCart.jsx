@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 const YourCart = () => {
-  const cartItems = useSelector((state) => state.items);
+  const cartItems = useSelector((state) => state.cart.items);
   console.log(cartItems);
 
   if (!cartItems || cartItems.length === 0) {

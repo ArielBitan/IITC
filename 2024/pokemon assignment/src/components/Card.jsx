@@ -27,6 +27,7 @@ const Card = (props) => {
 
   const spanStyle =
     "px-2 py-0.5 rounded-full hover:underline opacity-90 hover:opacity-100";
+
   return (
     <>
       <li className={liStyle}>

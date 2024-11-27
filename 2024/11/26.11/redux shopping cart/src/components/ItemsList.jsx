@@ -1,6 +1,6 @@
 import products from "../data/itemData";
 import { useDispatch } from "react-redux";
-import { addItem, removeAllItems, removeItem } from "../store/cartActions";
+import { addItem, removeAllItems, removeItem } from "../store/cartSlice.js";
 
 const ItemsList = () => {
   const dispatch = useDispatch();
@@ -22,13 +22,17 @@ const ItemsList = () => {
             </li>
           );
         })}
+        <button
+          style={{
+            backgroundColor: "red",
+            height: "3rem",
+            marginRight: "2rem",
+          }}
+          onClick={() => dispatch(removeAllItems())}
+        >
+          Remove all
+        </button>
       </ul>
-      <button
-        style={{ backgroundColor: "red", height: "3rem", marginRight: "2rem" }}
-        onClick={() => dispatch(removeAllItems())}
-      >
-        Remove all
-      </button>
     </>
   );
 };
