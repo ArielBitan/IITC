@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
+import Card from "./Card";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -16,14 +18,23 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const pokemon = props.pokemonData;
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <div onClick={handleOpen}>
+        <Card
+          key={pokemon.id}
+          id={pokemon.id}
+          types={pokemon.types.map((type) => type.type.name)}
+          name={pokemon.name}
+          sprite={pokemon.sprites.front_default}
+        />
+      </div>
       <Modal
         open={open}
         onClose={handleClose}
