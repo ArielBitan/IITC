@@ -1,6 +1,5 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
-import Card from "../components/Card.jsx";
+import { useLoaderData } from "react-router-dom";
 import Navbar from "../components/navbar.jsx";
 import PokemonCardModal from "../components/PokemonCardModal.jsx";
 const Home = () => {

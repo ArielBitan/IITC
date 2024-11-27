@@ -3,7 +3,7 @@ import { fetchGeneral } from "../Api.jsx";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
-const PokemonData = () => {
+const PokemonDetails = () => {
   const pokemonData = useLoaderData();
   const [selectedAbility, setSelectedAbility] = useState(null);
 
@@ -23,7 +23,6 @@ const PokemonData = () => {
 
   return (
     <>
-      <Navbar />
       <div className="container">
         <h1 class="text-4xl">{pokemonData.name}</h1>
         <img
@@ -60,4 +59,4 @@ const PokemonData = () => {
   );
 };
 
-export default PokemonData;
+export default PokemonDetails;
