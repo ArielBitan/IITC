@@ -3,6 +3,7 @@ import axios from "axios";
 export async function fetchGeneral(api) {
   try {
     const response = await axios.get(api);
+    console.log(response);
 
     const data = response.data;
     return data;
@@ -32,6 +33,39 @@ export async function fetchPokemons() {
   } catch (error) {
     console.error("Error fetching Pokémon data:", error);
     throw error;
+  }
+}
+
+export async function fetchPokemonsByType(type, limit = 100) {
+  try {
+    const response = await axios.get(`https://pokeapi.co/api/v2/type/${type}`);
+    const pokemons = response.data.pokemon.slice(0, limit);
+
+    const detailedPokemons = await Promise.all(
+      pokemons.map(async (pokemon) => {
+        const speciesData = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon.name}`
+        );
+
+        if (!speciesData.data.evolves_from_species) {
+          const pokemonData = await axios.get(pokemon.pokemon.url);
+          return pokemonData.data;
+        }
+
+        return null;
+      })
+    );
+
+    return detailedPokemons.filter((pokemon) => pokemon !== null);
+  } catch (error) {
+    if (error.response) {
+      console.error("Error response:", error.response);
+    } else if (error.request) {
+      console.error("Error request:", error.request);
+    } else {
+      console.error("General error:", error.message);
+    }
+    throw new Error("Error fetching Pokémon data by type");
   }
 }
 
