@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import PokemonType from "./PokemonType.jsx";
 const Card = (props) => {
   const colors = {
@@ -25,8 +24,7 @@ const Card = (props) => {
   let liStyle =
     "bg-gray-600 p-2 rounded-md text-slate-50 opacity-90 hover:opacity-100 hover:-translate-y-2";
 
-  const spanStyle =
-    "px-2 py-0.5 rounded-full hover:underline opacity-90 hover:opacity-100";
+  const spanStyle = "px-2 py-0.5 rounded-full opacity-90 hover:opacity-100";
 
   return (
     <>
@@ -34,14 +32,12 @@ const Card = (props) => {
         <h3>{props.name.charAt(0).toUpperCase() + props.name.slice(1)}</h3>
         <div className="flex items-center justify-evenly gap-2">
           {props.types.map((element, index) => (
-            <Link to={`/data/${element}`}>
-              <PokemonType
-                element={element}
-                key={index}
-                className={spanStyle}
-                style={{ backgroundColor: colors[element] }}
-              />
-            </Link>
+            <PokemonType
+              element={element}
+              key={index}
+              className={spanStyle}
+              style={{ backgroundColor: colors[element] }}
+            />
           ))}
           <img src={props.sprite} alt={props.name} />
         </div>

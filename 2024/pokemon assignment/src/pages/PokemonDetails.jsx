@@ -1,40 +1,60 @@
-import Navbar from "../components/navbar.jsx";
-import { fetchGeneral } from "../Api.jsx";
-import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { fetchGeneral, fetchSinglePokemon } from "../Api.jsx";
+import { useState, useEffect } from "react";
 
-const PokemonDetails = () => {
-  const pokemonData = useLoaderData();
+const PokemonDetails = (props) => {
+  const [pokemonData, setPokemonData] = useState("");
   const [selectedAbility, setSelectedAbility] = useState(null);
+
+  useEffect(() => {
+    const fetchPokemonData = async () => {
+      try {
+        const data = await fetchSinglePokemon(props.name);
+        setPokemonData(data);
+      } catch (error) {
+        console.error("Error fetching Pokémon data:", error);
+      }
+    };
+
+    fetchPokemonData();
+  }, [props.name]);
 
   const handleClick = async (item) => {
     try {
       const data = await fetchGeneral(item);
-      console.log(data);
-
       setSelectedAbility(data);
     } catch (error) {
       console.error("Error fetching ability data:", error);
     }
   };
+
   const closeDescription = () => {
     setSelectedAbility(null);
   };
 
+  if (!pokemonData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="container">
-        <h1 class="text-4xl">{pokemonData.name}</h1>
+        <h1 className="text-4xl">
+          {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
+        </h1>
         <img
-          class="w-1/6"
+          className="w-3/6"
           src={pokemonData.sprites.front_default}
-          alt={pokemonData.name}
+          alt={props.name}
         />
         <ul>
-          <h1 class="text-2xl">Abilities:</h1>
-          <div class="flex gap-5">
+          <h1 className="text-2xl">Abilities:</h1>
+          <div className="flex gap-5">
             {pokemonData.abilities.map((ability) => (
-              <li onClick={() => handleClick(ability.ability.url)}>
+              <li
+                className="hover:underline hover:cursor-pointer"
+                key={ability.ability.name}
+                onClick={() => handleClick(ability.ability.url)}
+              >
                 {ability.ability.name}
               </li>
             ))}
@@ -43,11 +63,13 @@ const PokemonDetails = () => {
       </div>
       {selectedAbility && (
         <div className="container">
-          <div class="w-4/6">
-            <h3 class="font-bold text-2xl underline">{selectedAbility.name}</h3>
-            <p>{selectedAbility.effect_entries[1].effect}</p>
+          <div>
+            <h3 className="font-bold text-2xl underline">
+              {selectedAbility.name}
+            </h3>
+            <p>{selectedAbility.effect_entries[1]?.effect}</p>
             <button
-              class="rounded-sm m-6 p-1 bg-red-600"
+              className="rounded-sm m-6 p-1 bg-red-600"
               onClick={closeDescription}
             >
               Close

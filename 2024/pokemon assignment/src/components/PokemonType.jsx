@@ -1,7 +1,7 @@
 const PokemonType = (props) => {
   return (
     <>
-      <span key={props.key} className={props.className} style={props.style}>
+      <span className={props.className} style={props.style}>
         {props.element}
       </span>
     </>

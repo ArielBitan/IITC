@@ -1,13 +1,5 @@
-import {
-  RouterProvider,
-  createBrowserRouter,
-  useParams,
-} from "react-router-dom";
-import {
-  fetchPokemons,
-  fetchPokemonsByType,
-  fetchSinglePokemon,
-} from "./Api.jsx";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { fetchPokemons } from "./Api.jsx";
 import "./App.css";
 
 // Pages
