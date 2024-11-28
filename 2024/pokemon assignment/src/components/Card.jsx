@@ -22,24 +22,30 @@ const Card = (props) => {
   };
 
   let liStyle =
-    "bg-gray-600 p-2 rounded-md text-slate-50 opacity-90 hover:opacity-100 hover:-translate-y-2";
+    "bg-gray-600 p-2 rounded-md min-h-56 text-slate-50 opacity-90 hover:opacity-100 hover:-translate-y-2";
 
   const spanStyle = "px-2 py-0.5 rounded-full opacity-90 hover:opacity-100";
 
   return (
     <>
       <li className={liStyle}>
-        <h3>{props.name.charAt(0).toUpperCase() + props.name.slice(1)}</h3>
-        <div className="flex items-center justify-evenly gap-2">
-          {props.types.map((element, index) => (
-            <PokemonType
-              element={element}
-              key={index}
-              className={spanStyle}
-              style={{ backgroundColor: colors[element] }}
-            />
-          ))}
-          <img src={props.sprite} alt={props.name} />
+        <div class="container ">
+          <h3 class="text-3xl">
+            {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
+          </h3>
+          <div class="flex justify-center">
+            <img src={props.sprite} alt={props.name} />
+          </div>
+          <div class="flex items-center justify-evenly gap-2">
+            {props.types.map((element, index) => (
+              <PokemonType
+                element={element}
+                key={index}
+                className={spanStyle}
+                style={{ backgroundColor: colors[element] }}
+              />
+            ))}
+          </div>
         </div>
       </li>
     </>

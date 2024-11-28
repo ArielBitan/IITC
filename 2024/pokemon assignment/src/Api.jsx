@@ -3,7 +3,6 @@ import axios from "axios";
 export async function fetchGeneral(api) {
   try {
     const response = await axios.get(api);
-    console.log(response);
 
     const data = response.data;
     return data;
@@ -22,10 +21,6 @@ export async function fetchPokemons() {
 
     const detailedPokemons = await Promise.all(
       pokemons.map(async (pokemon) => {
-        // const speciesData = await axios.get(
-        //   `https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`
-        // );
-
         const pokemonData = await axios.get(pokemon.url);
         return pokemonData.data;
       })
@@ -57,7 +52,6 @@ export async function fetchPokemonSpeciesData(id) {
       `https://pokeapi.co/api/v2/pokemon-species/${id}`
     );
     const pokemon = response.data;
-    console.log(pokemon);
     return pokemon;
   } catch (error) {
     throw new Error("Error fetching Pokemon data");

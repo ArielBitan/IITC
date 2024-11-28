@@ -1,9 +1,33 @@
 import { fetchGeneral, fetchSinglePokemon } from "../Api.jsx";
 import { useState, useEffect } from "react";
+import PokemonType from "../components/PokemonType.jsx";
 
 const PokemonDetails = (props) => {
   const [pokemonData, setPokemonData] = useState("");
   const [selectedAbility, setSelectedAbility] = useState(null);
+
+  const spanStyle =
+    "px-2 py-0.5 mr-2 rounded-full opacity-90 hover:opacity-100";
+  const colors = {
+    normal: "#A8A77A",
+    fire: "#EE8130",
+    water: "#6390F0",
+    electric: "#F7D02C",
+    grass: "#7AC74C",
+    ice: "#96D9D6",
+    fighting: "#C22E28",
+    poison: "#A33EA1",
+    ground: "#E2BF65",
+    flying: "#A98FF3",
+    psychic: "#F95587",
+    bug: "#A6B91A",
+    rock: "#B6A136",
+    ghost: "#735797",
+    dragon: "#6F35FC",
+    dark: "#705746",
+    steel: "#B7B7CE",
+    fairy: "#D685AD",
+  };
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -38,15 +62,25 @@ const PokemonDetails = (props) => {
   return (
     <>
       <div className="container">
-        <h1 className="text-4xl">
+        <h1 class="text-4xl">
           {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
         </h1>
         <img
-          className="w-3/6"
+          class="w-3/6"
           src={pokemonData.sprites.front_default}
           alt={props.name}
         />
-        <ul>
+        <ul class="w-full">
+          <div class="flex justify-end">
+            {props.types.map((element, index) => (
+              <PokemonType
+                element={element}
+                key={index}
+                className={spanStyle}
+                style={{ backgroundColor: colors[element] }}
+              />
+            ))}
+          </div>
           <h1 className="text-2xl">Abilities:</h1>
           <div className="flex gap-5">
             {pokemonData.abilities.map((ability) => (
@@ -55,7 +89,8 @@ const PokemonDetails = (props) => {
                 key={ability.ability.name}
                 onClick={() => handleClick(ability.ability.url)}
               >
-                {ability.ability.name}
+                {ability.ability.name.charAt(0).toUpperCase() +
+                  ability.ability.name.slice(1)}
               </li>
             ))}
           </div>
@@ -65,7 +100,8 @@ const PokemonDetails = (props) => {
         <div className="container">
           <div>
             <h3 className="font-bold text-2xl underline">
-              {selectedAbility.name}
+              {selectedAbility.name.charAt(0).toUpperCase() +
+                selectedAbility.name.slice(1)}
             </h3>
             <p>{selectedAbility.effect_entries[1]?.effect}</p>
             <button
