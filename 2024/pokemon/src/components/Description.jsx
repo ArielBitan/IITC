@@ -1,6 +1,7 @@
 import React from "react";
 
 const Description = ({
+  baseExp,
   heightpok,
   weightpok,
   pokstat1,
@@ -17,7 +18,10 @@ const Description = ({
   posbs6,
 }) => {
   return (
-    <div className="desc">
+    <div>
+      <p>
+        <b>Base Experience </b> : <b>{baseExp}</b>
+      </p>
       <p>
         <b>Height</b> : <b>{heightpok * 10} cm.</b>
       </p>

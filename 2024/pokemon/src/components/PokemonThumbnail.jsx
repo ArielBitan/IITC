@@ -4,6 +4,7 @@ const PokemonThumbnail = ({
   name,
   image,
   type,
+  baseExp,
   height,
   weight,
   stat1,
@@ -27,6 +28,7 @@ const PokemonThumbnail = ({
         <h3 className="text-lg font-semibold">{name.toUpperCase()}</h3>
         <small className="text-sm text-gray-700">Type: {type}</small>
         <Description
+          baseExp={baseExp}
           weightpok={weight}
           heightpok={height}
           pokstat1={stat1}

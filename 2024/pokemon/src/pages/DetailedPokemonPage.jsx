@@ -1,23 +1,25 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const DetailedPokemonPage = () => {
-  const { id } = useParams();
-  const pokemonId = Number(id);
+  const { pokemonName } = useParams();
   const [pokemon, setPokemon] = useState(null);
   const { allPokemons } = useSelector((state) => state.pokemon);
 
   useEffect(() => {
     const foundPokemon = allPokemons.find(
-      (pokemon) => pokemon.id === pokemonId
+      (pokemon) => pokemon.name === pokemonName
     );
+
     if (foundPokemon) {
       setPokemon(foundPokemon);
     } else {
       const fetchPokemonDetails = async () => {
         try {
-          const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+          const res = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+          );
           const data = await res.json();
 
           const detailedPokemon = {
@@ -47,7 +49,7 @@ const DetailedPokemonPage = () => {
 
       fetchPokemonDetails();
     }
-  }, [id, allPokemons]);
+  }, [pokemonName, allPokemons]);
 
   if (!pokemon) {
     return <div className="text-center p-10 text-xl">Pokémon not found</div>;
@@ -68,71 +70,24 @@ const DetailedPokemonPage = () => {
           </div>
         </div>
 
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-gray-700">General Info</h2>
-          <div className="flex justify-between mt-4">
-            <div>
-              <p className="text-lg">
-                <span className="font-bold">Height: </span>
-                {pokemon.height / 10} m
-              </p>
-              <p className="text-lg">
-                <span className="font-bold">Weight: </span>
-                {pokemon.weight / 10} kg
-              </p>
-            </div>
-            <div>
-              <p className="text-lg">
-                <span className="font-bold">Type: </span>
-                {pokemon.types.join(", ")}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-gray-700">Abilities</h2>
-          <ul className="mt-4 space-y-2">
-            {pokemon.abilities.map((ability, index) => (
-              <li key={index} className="text-lg">
-                <span>{ability.name}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-gray-700">Stats</h2>
-          <div className="grid grid-cols-2 gap-4 mt-4">
-            {pokemon.stats.map((stat) => (
-              <div key={stat.name} className="flex justify-between">
-                <span className="text-lg font-bold">{stat.name}</span>
-                <span className="text-lg">{stat.base_stat}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-gray-700">Moves</h2>
-          <ul className="mt-4 space-y-2">
-            {pokemon.moves.slice(0, 10).map((move, index) => (
-              <li key={index} className="text-lg">
-                <span>{move.name}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="text-sm text-gray-500 mt-2">...and many more moves</p>
-        </div>
-
-        <div className="text-center mt-6">
-          <button
-            onClick={() => window.history.back()}
-            className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition"
-          >
-            Back to Home
-          </button>
-        </div>
+        <ul className="flex space-x-4">
+          <li>
+            <Link to="stats" className="text-blue-500 hover:underline">
+              Stats
+            </Link>
+          </li>
+          <li>
+            <Link to="abilities" className="text-blue-500 hover:underline">
+              Abilities
+            </Link>
+          </li>
+          <li>
+            <Link to="moves" className="text-blue-500 hover:underline">
+              Moves
+            </Link>
+          </li>
+        </ul>
+        <Outlet context={pokemon} />
       </div>
     </div>
   );

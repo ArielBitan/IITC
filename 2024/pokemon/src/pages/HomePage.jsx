@@ -60,6 +60,7 @@ const HomePage = () => {
           id: data.id,
           name: data.name,
           image: data.sprites.other.dream_world.front_default,
+          baseExp: data.base_experience,
           types: data.types.map((type) => type.type.name),
           height: data.height,
           weight: data.weight,
@@ -85,17 +86,18 @@ const HomePage = () => {
   }, [pageNum]);
 
   return (
-    <div className="mt-20 px-4">
+    <div className="mt-4 px-4">
       <div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {allPokemons.map((pokemon) => (
-            <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+            <Link to={`/${pokemon.name}`} key={pokemon.id}>
               <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:bg-slate-300">
                 <PokemonThumbnail
                   id={pokemon.id}
                   name={pokemon.name}
                   image={pokemon.image}
                   type={pokemon.types.join(", ")}
+                  baseExp={pokemon.baseExp}
                   height={pokemon.height}
                   weight={pokemon.weight}
                   stat1={pokemon.stats[0]?.name}
