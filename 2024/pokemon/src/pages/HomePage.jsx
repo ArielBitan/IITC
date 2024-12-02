@@ -1,12 +1,50 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPokemons } from "../store/pokemonSlice";
+import { setPokemons, setNextPage, setPageNum } from "../store/pokemonSlice";
 import PokemonThumbnail from "../components/PokemonThumbnail";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { allPokemons, nextPage } = useSelector((state) => state.pokemon);
+  const { allPokemons, nextPage, pageNum } = useSelector(
+    (state) => state.pokemon
+  );
+
+  const getFirstPage = async () => {
+    dispatch(
+      setNextPage({ nextPage: "https://pokeapi.co/api/v2/pokemon?limit=20" })
+    );
+    dispatch(setPageNum({ pageNum: 1 }));
+  };
+
+  const getPreviousPage = async () => {
+    if (pageNum <= 1) {
+      return;
+    }
+    try {
+      const res = await fetch(nextPage);
+      if (!res.ok) throw new Error(`${res.status}`);
+      const data = await res.json();
+
+      dispatch(setNextPage({ nextPage: data.previous }));
+      dispatch(setPageNum({ pageNum: pageNum - 1 }));
+    } catch (error) {
+      console.error("Failed to fetch next page:", error);
+    }
+  };
+
+  const getNextPage = async () => {
+    try {
+      const res = await fetch(nextPage);
+      if (!res.ok) throw new Error(`${res.status}`);
+      const data = await res.json();
+
+      dispatch(setNextPage({ nextPage: data.next }));
+      dispatch(setPageNum({ pageNum: pageNum + 1 }));
+    } catch (error) {
+      console.error("Failed to fetch next page:", error);
+    }
+  };
 
   const getAllPokemons = async () => {
     const res = await fetch(nextPage);
@@ -39,27 +77,20 @@ const HomePage = () => {
       })
     );
 
-    dispatch(setPokemons({ pokemons: detailedPokemons, nextPage: data.next }));
+    dispatch(setPokemons({ pokemons: detailedPokemons }));
   };
 
   useEffect(() => {
     getAllPokemons();
-  }, []);
-  console.log(allPokemons);
+  }, [pageNum]);
 
   return (
     <div className="mt-20 px-4">
-      <h1 className="text-4xl font-bold text-center mb-8">
-        Pokemon Assignment
-      </h1>
       <div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {allPokemons.map((pokemon, index) => (
-            <Link to={`/pokemon/${pokemon.id}`}>
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-lg overflow-hidden"
-              >
+          {allPokemons.map((pokemon) => (
+            <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:bg-slate-300">
                 <PokemonThumbnail
                   id={pokemon.id}
                   name={pokemon.name}
@@ -84,12 +115,25 @@ const HomePage = () => {
             </Link>
           ))}
         </div>
-        <div className="mt-8 text-center">
+        <div className="mt-8 text-center flex gap-6 justify-center">
           <button
-            onClick={getAllPokemons}
+            onClick={getFirstPage}
             className="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 transition mb-4"
           >
-            More Pokemons
+            &lt; &lt;
+          </button>
+          <button
+            onClick={getPreviousPage}
+            className="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 transition mb-4"
+          >
+            &lt;
+          </button>
+          <span className="text-3xl font-sans">{pageNum}</span>
+          <button
+            onClick={getNextPage}
+            className="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 transition mb-4"
+          >
+            &gt;
           </button>
         </div>
       </div>

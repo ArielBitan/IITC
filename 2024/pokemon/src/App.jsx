@@ -7,9 +7,9 @@ import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <>
+    <div className="bg-slate-200">
       <Navbar />
-      <div className="mt-24">
+      <div className="mt-20">
         <Routes>
           <Route path="/" element={<HomePage />} />
 
@@ -20,7 +20,7 @@ function App() {
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </div>
-    </>
+    </div>
   );
 }
 
