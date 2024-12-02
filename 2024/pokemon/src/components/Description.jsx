@@ -23,11 +23,11 @@ const Description = ({
         <b>Base Experience </b> : <b>{baseExp}</b>
       </p>
       <p>
-        <b>Height</b> : <b>{heightpok * 10} cm.</b>
+        <b>Height</b> : <b>{(heightpok * 10).toFixed(0)} cm.</b>
       </p>
 
       <p>
-        <b>Weight</b> : <b>{weightpok * 0.1} kg</b>
+        <b>Weight</b> : <b>{(weightpok * 0.1).toFixed(0)} kg</b>
       </p>
 
       <h3 className="underline mt-3">
