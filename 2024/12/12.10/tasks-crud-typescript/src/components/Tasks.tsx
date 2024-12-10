@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useTasks } from "./TasksContext";
-import { api } from "../api";
 
 import TaskForm from "./TaskForm";
 import TasksList from "./TasksList";
@@ -23,7 +22,7 @@ const Tasks = () => {
 
   useEffect(() => {
     fetchTasks();
-  }, [fetchTasks]);
+  }, []);
 
   const handleEditTask = (task: Task) => {
     setEditingTask(task);

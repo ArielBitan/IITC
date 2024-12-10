@@ -1,11 +1,12 @@
 import Tasks from "./components/Tasks";
 import { TasksProvider } from "./components/TasksContext";
+import TasksHeader from "./components/TasksHeader";
 
 function App() {
   return (
     <div className="text-center">
-      <h1 className="text-4xl p-4">Task App</h1>
       <TasksProvider>
+        <TasksHeader />
         <Tasks />
       </TasksProvider>
     </div>
