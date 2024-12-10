@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Task } from "../App";
+import { Task } from "./Tasks";
 
 interface Props {
   addTask: (newTask: Task) => void;
@@ -21,7 +21,7 @@ const TaskForm: React.FC<Props> = ({ addTask, updateTask, editingTask }) => {
       setFormData({
         title: editingTask.title,
         description: editingTask.description,
-        dueDate: editingTask.dueDate.toString().split("T")[0], // Convert Date to string
+        dueDate: editingTask.dueDate.toString().split("T")[0],
         priority: editingTask.priority,
         status: editingTask.status,
       });
@@ -71,7 +71,7 @@ const TaskForm: React.FC<Props> = ({ addTask, updateTask, editingTask }) => {
       className="flex flex-col gap-6 p-8 bg-white rounded-lg shadow-md max-w-xl mx-auto"
     >
       <input
-        className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-lime-400 focus:outline-none"
+        className="border border-gray-300 rounded-lg p-3 focus:ring-2"
         type="text"
         name="title"
         value={formData.title}
@@ -79,14 +79,14 @@ const TaskForm: React.FC<Props> = ({ addTask, updateTask, editingTask }) => {
         placeholder="Title"
       />
       <textarea
-        className="border border-gray-300 rounded-lg p-3 h-24 focus:ring-2 focus:ring-lime-400 focus:outline-none"
+        className="border border-gray-300 rounded-lg p-3 h-24 focus:ring-2"
         name="description"
         value={formData.description}
         onChange={handleChange}
         placeholder="Description"
       />
       <input
-        className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-lime-400 focus:outline-none"
+        className="border border-gray-300 rounded-lg p-3 "
         type="date"
         name="dueDate"
         value={formData.dueDate}
@@ -94,7 +94,7 @@ const TaskForm: React.FC<Props> = ({ addTask, updateTask, editingTask }) => {
       />
       <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
         <select
-          className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-lime-400 focus:outline-none"
+          className="border border-gray-300 rounded-lg p-3"
           name="status"
           value={formData.status}
           onChange={handleChange}
@@ -104,7 +104,7 @@ const TaskForm: React.FC<Props> = ({ addTask, updateTask, editingTask }) => {
           <option value="completed">Completed</option>
         </select>
         <select
-          className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-lime-400 focus:outline-none"
+          className="border border-gray-300 rounded-lg p-3"
           name="priority"
           value={formData.priority}
           onChange={handleChange}
@@ -116,7 +116,7 @@ const TaskForm: React.FC<Props> = ({ addTask, updateTask, editingTask }) => {
       </div>
       <button
         type="submit"
-        className="bg-lime-400 text-white p-3 rounded-lg hover:bg-lime-500 focus:ring-4 focus:ring-lime-300 focus:outline-none w-full"
+        className="bg-lime-400 text-white p-3 rounded-lg hover:bg-lime-500 w-full"
       >
         {editingTask ? "Update Task" : "Add Task"}
       </button>
