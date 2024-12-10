@@ -3,8 +3,8 @@ import { TasksProvider } from "./components/TasksContext";
 
 function App() {
   return (
-    <div>
-      <h1 className="text-4xl">Task App</h1>
+    <div className="text-center">
+      <h1 className="text-4xl p-4">Task App</h1>
       <TasksProvider>
         <Tasks />
       </TasksProvider>

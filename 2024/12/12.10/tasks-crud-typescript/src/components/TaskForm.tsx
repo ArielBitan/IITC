@@ -71,7 +71,7 @@ const TaskForm: React.FC<Props> = ({ addTask, updateTask, editingTask }) => {
       className="flex flex-col gap-6 p-8 bg-white rounded-lg shadow-md max-w-xl mx-auto"
     >
       <input
-        className="border border-gray-300 rounded-lg p-3 focus:ring-2"
+        className="border border-gray-300 rounded-lg p-3"
         type="text"
         name="title"
         value={formData.title}
