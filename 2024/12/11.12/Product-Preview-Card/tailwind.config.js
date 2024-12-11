@@ -3,10 +3,6 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      backgroundImage: {
-        mobile: "url(./images/image-product-mobile.jpg)",
-        desktop: "url('./images/image-product-desktop.jpg')",
-      },
       letterSpacing: {
         "extra-widest": "0.4em",
       },
