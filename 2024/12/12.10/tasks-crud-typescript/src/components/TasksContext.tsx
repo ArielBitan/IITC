@@ -29,19 +29,29 @@ interface AuthProviderProps {
 
 export const TasksProvider = ({ children }: AuthProviderProps) => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [filters, setFilters] = useState<{ [filter: string]: string }>({});
 
   const fetchTasks = async (filterName?: keyof Task, filter?: string) => {
     try {
       const { data } = await api.get("tasks");
+      let updatedFilters = { ...filters };
 
-      if (filterName && filter) {
-        const filteredTasks = data.filter(
-          (task: Task) => task[filterName] === filter
-        );
-        setTasks(filteredTasks);
-      } else {
-        setTasks(data);
+      if (filterName) {
+        if (!filter) {
+          delete updatedFilters[filterName];
+        } else if (filter) {
+          updatedFilters[filterName] = filter;
+        }
       }
+
+      const filteredTasks = data.filter((task: Task) =>
+        Object.entries(updatedFilters).every(
+          ([key, value]) => task[key as keyof Task] === value
+        )
+      );
+
+      setFilters(updatedFilters);
+      setTasks(filteredTasks);
     } catch (error) {
       console.error("Error fetching tasks:", error);
     }
