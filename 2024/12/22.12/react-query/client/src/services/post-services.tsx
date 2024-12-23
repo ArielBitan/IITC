@@ -16,11 +16,9 @@ export const createPost = async (Post: PostInputs): Promise<Post> => {
   return data;
 };
 
-export const updatePost = async (
-  id: string,
-  updates: Partial<Post>
-): Promise<Post> => {
-  const { data } = await api.patch(`/posts/${id}`, updates);
+export const updatePost = async (updatedPost: Post): Promise<Post> => {
+  console.log(updatedPost);
+  const { data } = await api.put(`/posts/${updatedPost._id}`, updatedPost);
   return data;
 };
 

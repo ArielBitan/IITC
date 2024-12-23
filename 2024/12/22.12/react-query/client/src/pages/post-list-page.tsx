@@ -4,9 +4,12 @@ import { deletePost, getPosts } from "../services/post-services";
 import { Post } from "../types/post-types";
 import Loader from "../components/Loader";
 import ErrorMessage from "../components/Error";
+import { useNavigate } from "react-router-dom";
 
 const PostListPage = () => {
   const queryClient = useQueryClient();
+
+  const navigate = useNavigate();
 
   const {
     data: posts,
@@ -45,6 +48,7 @@ const PostListPage = () => {
     if (isConfirmed) {
       await deletepostMutation.mutateAsync(id);
     }
+    navigate("/posts");
   }
   if (isLoading) return <Loader />;
   if (error) return <ErrorMessage message={error.message} />;

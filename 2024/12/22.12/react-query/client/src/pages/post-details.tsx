@@ -25,6 +25,9 @@ const PostDetailsPage = () => {
     <div className="p-5">
       <h1 className="text-2xl font-bold">{post?.title}</h1>
       <p>{post?.content}</p>
+      <Link to={`/posts/edit/${post?._id}`} className="text-blue-500 underline">
+        Edit
+      </Link>
       <Link to="/posts" className="text-blue-500 underline mt-3 block">
         Back to Cats
       </Link>
